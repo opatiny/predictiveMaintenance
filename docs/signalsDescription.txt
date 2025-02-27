@@ -1,0 +1,89 @@
+# Description of the contents of the data files
+
+Temperature:
+•	lrSigAxeBTemp: Temperature of Axis B
+•	lrSigAxeCTemp: Temperature of Axis C
+•	lrSigAxeXTemp: Temperature of Axis X
+•	lrSigAxeYTemp: Temperature of Axis Y
+•	lrSigAxeZTemp: Temperature of Axis Z
+•	lrSigPieceTemp: Piece Temperature
+•	lrSigSpindleTemp: Spindle Temperature
+•	lrSigTableTemp: Table Temperature
+•	lrSigZoneAxeTemp: Axis Zone Temperature
+
+Lubrication State:
+•	lrSigCryoLubState: Cryogenic Lubrication State
+•	lrSigLubrificationState: Lubrication State
+
+Monitoring and Control:
+•	lrSigFeedRateOverride: Feed Rate Override Monitoring
+•	lrSigMeasurementMode: Measurement Mode
+•	lrSigSpindleOverride: Spindle Override Monitoring
+
+Axis Current:
+•	stSigAxCurrentB: Current of Axis B
+•	stSigAxCurrentC: Current of Axis C
+•	stSigAxCurrentS: Current of Axis S
+•	stSigAxCurrentX: Current of Axis X
+•	stSigAxCurrentY: Current of Axis Y
+•	stSigAxCurrentZ: Current of Axis Z
+ 
+Axis Position:
+•	stSigAxPosACSB: Position of Axis B in ACS Coordinates
+•	stSigAxPosACSC: Position of Axis C in ACS Coordinates
+•	stSigAxPosACSX: Position of Axis X in ACS Coordinates
+•	stSigAxPosACSY: Position of Axis Y in ACS Coordinates
+•	stSigAxPosACSZ: Position of Axis Z in ACS Coordinates
+•	stSigAxPosMCSB: Position of Axis B in MCS Coordinates
+•	stSigAxPosMCSC: Position of Axis C in MCS Coordinates
+•	stSigAxPosMCSX: Position of Axis X in MCS Coordinates
+•	stSigAxPosMCSY: Position of Axis Y in MCS Coordinates
+•	stSigAxPosMCSZ: Position of Axis Z in MCS Coordinates
+
+Following Errors:
+•	stSigAxFollErrB: Following Error of Axis B
+•	stSigAxFollErrC: Following Error of Axis C
+•	stSigAxFollErrX: Following Error of Axis X
+•	stSigAxFollErrY: Following Error of Axis Y
+•	stSigAxFollErrZ: Following Error of Axis Z
+
+Velocity:
+•	stSigAxVeloACSB: Velocity of Axis B in ACS Coordinates
+•	stSigAxVeloACSC: Velocity of Axis C in ACS Coordinates
+•	stSigAxVeloACSX: Velocity of Axis X in ACS Coordinates
+•	stSigAxVeloACSY: Velocity of Axis Y in ACS Coordinates
+•	stSigAxVeloACSZ: Velocity of Axis Z in ACS Coordinates
+•	stSigAxVeloMCSB: Velocity of Axis B in MCS Coordinates
+•	stSigAxVeloMCSC: Velocity of Axis C in MCS Coordinates
+•	stSigAxVeloMCSX: Velocity of Axis X in MCS Coordinates
+•	stSigAxVeloMCSY: Velocity of Axis Y in MCS Coordinates
+•	stSigAxVeloMCSZ: Velocity of Axis Z in MCS Coordinates
+ 
+Other Signals:
+•	stSigCOMCurrentMeanValue: Mean Value of COM Current
+•	stSigCOMThresholdConfirmation: COM Threshold Confirmation
+•	stSigCOMThresholdTrigger: COM Threshold Trigger
+•	stSigCOMThresholdValidation: COM Threshold Validation
+•	stSigOperation: Operation Signal
+•	stSigPowerMotS: Power of Motor S
+•	stSigSinus: Sine Signal
+•	stSigSpindleIndicator: Spindle Indicator
+•	stSigSpindleVelocity: Spindle Velocity
+•	stSigStatusULInt: UL Int Status
+•	stSigTouchPosACSB: Touch Position of Axis B in ACS Coordinates
+•	stSigTouchPosACSC: Touch Position of Axis C in ACS Coordinates
+•	stSigTouchPosACSX: Touch Position of Axis X in ACS Coordinates
+•	stSigTouchPosACSY: Touch Position of Axis Y in ACS Coordinates
+•	stSigTouchPosACSZ: Touch Position of Axis Z in ACS Coordinates
+•	stSigTouchPosMCSB: Touch Position of Axis B in MCS Coordinates
+•	stSigTouchPosMCSC: Touch Position of Axis C in MCS Coordinates
+•	stSigTouchPosMCSX: Touch Position of Axis X in MCS Coordinates
+•	stSigTouchPosMCSY: Touch Position of Axis Y in MCS Coordinates
+•	stSigTouchPosMCSZ: Touch Position of Axis Z in MCS Coordinates
+•	stSigVal0: Value 0
+•	stSigVal1: Value 1
+•	stSigVal2: Value 2
+•	stSigVal3: Value 3
+•	stSigVal4: Value 4
+•	stTimeStampFast: Fast Timestamp
+
