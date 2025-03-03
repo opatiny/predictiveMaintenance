@@ -8,3 +8,25 @@ Use warm-up data of micro5 milling machines in order to identify the current mac
 
 1. Cluster data in order to attribute new data to the correct machine
 2. Create a transformation matrix in order to normalize a machines data into a reference framework
+
+## Signals that look interesting
+
+- temperatures:
+  - lrSigSpindleTemp
+- axes currents
+  - stSigAxCurrentB
+  - stSigAxCurrentS
+  - stSigAxCurrentX
+  - stSigAxCurrentY
+  - stSigAxCurrentZ
+  - stSigAxFollErrB
+- axes positions -> 10 signals, seem to be oscillating -> fourier transform?
+- axes velocities? -> 10 signals
+- motors power: stSigPowerMotS
+- consignes:
+  - stSigSpindleVelocity
+  - stSigOperation
+
+## Various notes
+
+- does knowing the temperature allow us to make some kind of compensation on the data?
