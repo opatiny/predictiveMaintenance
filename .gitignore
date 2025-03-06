@@ -1,5 +1,5 @@
-data/
+data/**/*.csv
+!data/signalsDescription.csv
 **/**/plots/
 **/**/.DS_Store
 **/__pycache__/
-**/**/*.pyc
