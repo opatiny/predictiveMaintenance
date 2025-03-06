@@ -13,14 +13,14 @@ class TestUtils(unittest.TestCase):
         data = pd.DataFrame(
             {0: [1000000000, 2000000000, 3000000000], 1: [0.0, 0.1, 0.2]}
         )
-        expected = [0, 1, 2]
+        expected = pd.DataFrame({0: [0, 1, 2], 1: [0.0, 0.1, 0.2]})
 
-        result = Utils.normalizeTime(data)
+        data[0] = Utils.normalizeTime(data[0])
 
-        print(result)
+        print(data)
 
         # Compare the DataFrames
-        pd.testing.assert_frame_equal(result, expected)
+        pd.testing.assert_frame_equal(data, expected)
 
 
 if __name__ == "__main__":
