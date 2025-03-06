@@ -34,7 +34,6 @@ plt.xlabel("Time [s]")
 plt.ylabel("Value")
 plt.grid(True)
 plt.show()
-plt.close("all")
 
 # Close all plots
 plt.close("all")

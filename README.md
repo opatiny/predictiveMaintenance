@@ -19,7 +19,7 @@ Use warm-up data of micro5 milling machines in order to identify the current mac
   - stSigAxCurrentX
   - stSigAxCurrentY
   - stSigAxCurrentZ
-  - stSigAxFollErrB
+- error signals seems interesting as well
 - axes positions -> 10 signals, seem to be oscillating -> fourier transform?
 - axes velocities? -> 10 signals
 - motors power: stSigPowerMotS
