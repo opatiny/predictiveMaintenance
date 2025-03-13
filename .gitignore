@@ -1,4 +1,5 @@
 data/**/*.csv
+data/**/*.nc
 !data/signalsDescription.csv
 **/**/plots/
 **/**/.DS_Store

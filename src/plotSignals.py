@@ -31,6 +31,12 @@ def plotSignals(dataPath: str, savePath: str, nbPlots: int = None) -> None:
     # Get all files in the folder
     files = os.listdir(dataPath)
 
+    # Read signals descriptions
+    signalsInformation = pd.read_csv("data/signalsDescription.csv", sep=",")
+
+    # only keep the interesting signals from the folder
+    files = [file for file in files if file in signalsInformation["fileName"].values]
+
     # If nbPlots is None, plot all signals
     if nbPlots is None:
         nbPlots = len(files)
@@ -39,7 +45,7 @@ def plotSignals(dataPath: str, savePath: str, nbPlots: int = None) -> None:
 
     print("Files to plot: ", files)
 
-    # Loop through all files
+    # Loop through files
     for file in files:
         # Read the file
         data = pd.read_csv(dataPath + "/" + file, header=None, sep=";", index_col=False)
@@ -48,14 +54,25 @@ def plotSignals(dataPath: str, savePath: str, nbPlots: int = None) -> None:
         data[0] = (data[0] - data[0][0]) / 1e9
 
         # Get the signal name
-        signal_name = file.split(".")[0]
+        signalName = file.split(".")[0]
+
+        signalIndex = signalsInformation[signalsInformation["fileName"] == file].index[
+            0
+        ]
+
+        print(signalIndex)
+
+        signalDescription = signalsInformation.loc[signalIndex, "description"]
+        signalUnit = signalsInformation.loc[signalIndex, "unit"]
+
+        yLabel = signalDescription + " [" + signalUnit + "]"
 
         # Plot the signal
         plt.figure()
-        plt.plot(data[0], data[1], label=signal_name)
-        plt.title(dataFolderName + ": " + signal_name)
+        plt.plot(data[0], data[1], label=signalName)
+        plt.title(dataFolderName + ": " + signalName)
         plt.xlabel("Time [s]")
-        plt.ylabel("Value")
+        plt.ylabel(yLabel)
         plt.grid()
-        plt.savefig(saveFolderPath + "/" + signal_name + ".svg", format="svg")
+        plt.savefig(saveFolderPath + "/" + signalName + ".svg", format="svg")
         plt.close()
