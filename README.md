@@ -9,6 +9,10 @@ Use warm-up data of micro5 milling machines in order to identify the current mac
 1. Cluster data in order to attribute new data to the correct machine
 2. Create a transformation matrix in order to normalize a machines data into a reference framework
 
+## Running unit tests
+
+Just run the python test file as you would any other file.
+
 ## Time stamps
 
 Time stamps are in Microsoft filetime format!!
@@ -17,19 +21,18 @@ Time stamps are in Microsoft filetime format!!
 
 ## Signals that look interesting
 
-- temperatures:
-  - lrSigSpindleTemp
+- spindle temperature: lrSigSpindleTemp
 - axes currents
   - stSigAxCurrentB
   - stSigAxCurrentS
   - stSigAxCurrentX
   - stSigAxCurrentY
   - stSigAxCurrentZ
-- error signals seems interesting as well
-- axes positions -> 10 signals, seem to be oscillating -> fourier transform?
-- axes velocities? -> 10 signals
-- motors power: stSigPowerMotS
-- consignes:
+- following error signals
+- axes positions -> seem to be oscillating -> fourier transform?
+- axes velocities?
+- spindle power: stSigPowerMotS
+- commands:
   - stSigSpindleVelocity
   - stSigOperation
 
