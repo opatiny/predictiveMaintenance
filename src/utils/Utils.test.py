@@ -13,9 +13,10 @@ class TestUtils(unittest.TestCase):
         data = pd.DataFrame(
             {0: [1000000000, 2000000000, 3000000000], 1: [0.0, 0.1, 0.2]}
         )
+
         expected = pd.DataFrame({0: [0, 1, 2], 1: [0.0, 0.1, 0.2]})
 
-        data[0] = Utils.normalizeTime(data[0])
+        data[0] = Utils.getNormalizedTime(data[0])
 
         print(data)
 

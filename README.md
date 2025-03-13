@@ -9,6 +9,12 @@ Use warm-up data of micro5 milling machines in order to identify the current mac
 1. Cluster data in order to attribute new data to the correct machine
 2. Create a transformation matrix in order to normalize a machines data into a reference framework
 
+## Time stamps
+
+Time stamps are in Microsoft filetime format!!
+
+"The FILETIME structure is a 64-bit value that represents the number of 100-nanosecond intervals that have elapsed since January 1, 1601, Coordinated Universal Time (UTC)."
+
 ## Signals that look interesting
 
 - temperatures:
