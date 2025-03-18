@@ -29,7 +29,7 @@ def plotSignal(filePath: str, nbPoints: int = None) -> None:
     data = data.sort_values(by=0)
 
     # convert time to seconds from beginning of array
-    data.loc[:, 0] = Utils.getNormalizedTime(data.loc[:, 0])
+    data.loc[0] = Utils.getNormalizedTime(data.loc[0])
 
     # pick how many points to plot
     # If nbPlots is None, plot all signals

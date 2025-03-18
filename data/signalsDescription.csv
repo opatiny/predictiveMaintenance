@@ -49,4 +49,4 @@ stSigPowerMotS.csv,Spindle power,W,1,
 stSigSinus.csv,Surveillance signal,-,1,
 stSigSpindleIndicator.csv,Spindle current indicator,mA,1,
 stSigSpindleVelocity.csv,Spindle target speed,rpm,1,command
-stTimeStampFast.csv,Time stamp,,,
+stTimeStampFast.csv,Time stamp,-,,

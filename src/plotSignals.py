@@ -53,7 +53,7 @@ def plotSignals(dataPath: str, savePath: str, nbPlots: int = None) -> None:
         data = pd.read_csv(dataPath + "/" + file, header=None, sep=";", index_col=False)
 
         # Convert time to seconds
-        data.loc[:, 0] = Utils.getNormalizedTime(data.loc[:, 0])
+        data.loc[0] = Utils.getNormalizedTime(data.loc[0])
 
         # Get the signal name
         signalName = file.split(".")[0]
