@@ -18,18 +18,19 @@ def plotSignal(filePath: str, nbPoints: int = None) -> None:
     """
 
     # Get filename
+    signalsFolderName = filePath.split("/")[-2]
     filename = filePath.split("/")[-1]
 
     # Load data from csv file
     data = pd.read_csv(
-        filePath, sep=";", header=None
+        filePath, sep=";", header=None, names=["timestamp", "value"]
     )  # use names=["time", "value"] to add column names
 
     # sort data by time
-    data = data.sort_values(by=0)
+    data = data.sort_values(by="timestamp")
 
     # convert time to seconds from beginning of array
-    data.loc[0] = Utils.getNormalizedTime(data.loc[0])
+    data.loc[:, "timeSeconds"] = Utils.getNormalizedTime(data.loc[:, "timestamp"])
 
     # pick how many points to plot
     # If nbPlots is None, plot all signals
@@ -41,12 +42,11 @@ def plotSignal(filePath: str, nbPoints: int = None) -> None:
     yLabel = Utils.getYLabel(filename)
 
     # Plot data
-    plt.plot(plotData.loc[:, 0], plotData.loc[:, 1], "ro-", markersize=3)
-    plt.title(filePath)
+    plt.figure()
+    plt.plot(
+        plotData.loc[:, "timeSeconds"], plotData.loc[:, "value"], "ro-", markersize=3
+    )
+    plt.title(signalsFolderName + "  " + filename)
     plt.xlabel("Time [s]")
     plt.ylabel(yLabel)
     plt.grid(True)
-    plt.show()
-
-    # Close all plots
-    plt.close("all")
