@@ -5,21 +5,46 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from utils import Utils
+from plotSignal import plotSignal
+
+from typing import TypedDict
+
+
+class PlotSignalsOptions(TypedDict):
+    """
+    Options for the plotSignals function.
+
+    Attributes:
+
+    nbPlots (int, optional): The number of files to process. If None, all files in the folder will be plotted.
+    nbPoints (int, optional): The number of points from the data to plot. If None, all points will be plotted.
+    debug (bool, optional): Print debug information.
+    filterPlots (bool, optional): Filter the signals to plot.
+    """
+
+    nbPlots: str
+    nbPoints: int
+    debug: bool
+    filterPlots: bool
 
 
 # Function to plot signals
-def plotSignals(dataPath: str, savePath: str, nbPlots: int = None) -> None:
+def plotSignals(dataPath: str, savePath: str, options: PlotSignalsOptions = {}) -> None:
     """
     Plot all signals from a folder and save plots in a new folder.
 
     Parameters:
     dataPath (str): The path to the folder containing the signal files.
     savePath (str): The path to the folder where the plots will be saved. The function automatically creates a new folder with the same name as the data folder.
-    nbPlots (int, optional): The number of files to process. If None, all files in the folder will be plotted.
+    options (Options): The options for the plotSignals function.
 
     Returns:
     None
     """
+    nbPlots = options.get("nbPlots", None)
+    nbPoints = options.get("nbPoints", None)
+    debug = options.get("debug", False)
+    filterPltos = options.get("filterPlots", False)
 
     dataFolderName = dataPath.split("/")[-1]
     print(dataFolderName)
@@ -47,34 +72,17 @@ def plotSignals(dataPath: str, savePath: str, nbPlots: int = None) -> None:
 
     print("Files to plot: ", files)
 
+    i = 0
+
     # Loop through files
     for file in files:
-        # Read the file
-        data = pd.read_csv(dataPath + "/" + file, header=None, sep=";", index_col=False)
+        i += 1
+        if debug:
+            print("Plotting file ", i, " / ", nbPlots)
 
-        # Convert time to seconds
-        data.loc[0] = Utils.getNormalizedTime(data.loc[0])
+        plotSignal(dataPath + "/" + file, nbPoints)
 
-        # Get the signal name
-        signalName = file.split(".")[0]
-
-        signalIndex = signalsInformation[signalsInformation["fileName"] == file].index[
-            0
-        ]
-
-        print(signalIndex)
-
-        signalDescription = signalsInformation.loc[signalIndex, "description"]
-        signalUnit = signalsInformation.loc[signalIndex, "unit"]
-
-        yLabel = signalDescription + " [" + signalUnit + "]"
-
-        # Plot the signal
-        plt.figure()
-        plt.plot(data[0], data[1], label=signalName)
-        plt.title(dataFolderName + ": " + signalName)
-        plt.xlabel("Time [s]")
-        plt.ylabel(yLabel)
-        plt.grid()
-        plt.savefig(saveFolderPath + "/" + signalName + ".svg", format="svg")
+        # Save the plot
+        fileName = file.split(".")[0]
+        plt.savefig(saveFolderPath + "/" + fileName + ".svg", format="svg")
         plt.close()

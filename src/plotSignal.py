@@ -28,6 +28,8 @@ def plotSignal(filePath: str, nbPoints: int = None) -> None:
 
     # sort data by time
     data = data.sort_values(by="timestamp")
+    # reset index
+    data.sort_index(inplace=True)
 
     # convert time to seconds from beginning of array
     data.loc[:, "timeSeconds"] = Utils.getNormalizedTime(data.loc[:, "timestamp"])
@@ -46,7 +48,7 @@ def plotSignal(filePath: str, nbPoints: int = None) -> None:
     plt.plot(
         plotData.loc[:, "timeSeconds"], plotData.loc[:, "value"], "ro-", markersize=3
     )
-    plt.title(signalsFolderName + "  " + filename)
+    plt.title(signalsFolderName + " - " + filename)
     plt.xlabel("Time [s]")
     plt.ylabel(yLabel)
     plt.grid(True)
