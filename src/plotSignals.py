@@ -36,7 +36,7 @@ def plotSignals(dataPath: str, savePath: str, options: PlotSignalsOptions = {}) 
     Parameters:
     dataPath (str): The path to the folder containing the signal files.
     savePath (str): The path to the folder where the plots will be saved. The function automatically creates a new folder with the same name as the data folder.
-    options (Options): The options for the plotSignals function.
+    options (PlotSignalsOptions): The options for the plotSignals function.
 
     Returns:
     None
