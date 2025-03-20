@@ -19,11 +19,11 @@ from addSeries import addSeries
 currentPath = Path(__file__).resolve().parent
 print(currentPath)
 
-machinePath = "../../data/Machine#1_Mecatis/"
-samplePath1 = "Warmup_Mecatis_03_02_25/"
-samplePath2 = "Warmup_Mecatis_05_02_25/"
-samplePath3 = "Warmup_Mecatis_17_02_25/"
-file = "stSigAxCurrentS.csv"
+machinePath = "../../data/Mecatis/"
+samplePath1 = "Warmup_Mecatis_03_02_25"
+samplePath2 = "Warmup_Mecatis_05_02_25"
+samplePath3 = "Warmup_Mecatis_17_02_25"
+file = "stSigAxCurrentB.csv"
 
 
 # concanetating the path
@@ -35,7 +35,7 @@ nbPoints = None
 
 
 plt.figure()
-plt.title("Spindle currents from various samples (Mecatis)")
+plt.title("Axis B motor current from various samples (Mecatis)")
 plt.xlabel("Time [s]")
 plt.ylabel("Current [mA]")
 plt.grid(True)

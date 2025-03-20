@@ -4,3 +4,4 @@ data/**/*.nc
 **/**/plots/
 **/**/.DS_Store
 **/__pycache__/
+*.parquet

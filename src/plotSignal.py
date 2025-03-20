@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-import math
 
+from utils.getFormattedSignalData import getFormattedSignalData
 from utils import Utils
 
 
@@ -22,17 +22,7 @@ def plotSignal(filePath: str, nbPoints: int = None) -> None:
     filename = filePath.split("/")[-1]
 
     # Load data from csv file
-    data = pd.read_csv(
-        filePath, sep=";", header=None, names=["timestamp", "value"]
-    )  # use names=["time", "value"] to add column names
-
-    # sort data by time
-    data = data.sort_values(by="timestamp")
-    # reset index
-    data.sort_index(inplace=True)
-
-    # convert time to seconds from beginning of array
-    data.loc[:, "timeSeconds"] = Utils.getNormalizedTime(data.loc[:, "timestamp"])
+    data = getFormattedSignalData(filePath)
 
     # pick how many points to plot
     # If nbPlots is None, plot all signals
@@ -46,7 +36,7 @@ def plotSignal(filePath: str, nbPoints: int = None) -> None:
     # Plot data
     plt.figure()
     plt.plot(
-        plotData.loc[:, "timeSeconds"], plotData.loc[:, "value"], "ro-", markersize=3
+        plotData.loc[:, "timeSeconds"], plotData.loc[:, "value"], "o-", markersize=3
     )
     plt.title(signalsFolderName + " - " + filename)
     plt.xlabel("Time [s]")
