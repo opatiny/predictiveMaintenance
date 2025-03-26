@@ -30,7 +30,6 @@ def getYLabel(fileName: str) -> str:
     fileDir = os.path.dirname(fileAbsPath)
     infoPath = fileDir + "/../../data/signalsDescription.csv"
 
-    print(infoPath)
     signalsInformation = pd.read_csv(infoPath, sep=",")
 
     signalIndex = signalsInformation[signalsInformation["fileName"] == fileName].index[

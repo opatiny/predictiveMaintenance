@@ -1,7 +1,7 @@
 data/**/*.csv
 data/**/*.nc
 !data/signalsDescription.csv
-**/**/plots/
+results/**
 **/**/.DS_Store
 **/__pycache__/
 *.parquet
