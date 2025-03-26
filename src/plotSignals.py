@@ -19,7 +19,7 @@ class PlotSignalsOptions(TypedDict):
     nbPlots (int, optional): The number of files to process. If None, all files in the folder will be plotted.
     nbPoints (int, optional): The number of points from the data to plot. If None, all points will be plotted.
     debug (bool, optional): Print debug information.
-    filterPlots (bool, optional): Filter the signals to plot.
+    filterPlots (bool, optional): Only keep the signals with useful == 1 in the signalsDescription.csv file.
     """
 
     nbPlots: str
@@ -44,7 +44,7 @@ def plotSignals(dataPath: str, savePath: str, options: PlotSignalsOptions = {}) 
     nbPlots = options.get("nbPlots", None)
     nbPoints = options.get("nbPoints", None)
     debug = options.get("debug", False)
-    filterPltos = options.get("filterPlots", False)
+    filterPlots = options.get("filterPlots", False)
 
     dataFolderName = dataPath.split("/")[-1]
     print(dataFolderName)
@@ -59,10 +59,17 @@ def plotSignals(dataPath: str, savePath: str, options: PlotSignalsOptions = {}) 
     files = os.listdir(dataPath)
 
     # Read signals descriptions
-    signalsInformation = pd.read_csv("data/signalsDescription.csv", sep=",")
+    fileAbsPath = os.path.abspath(__file__)
+    fileDir = os.path.dirname(fileAbsPath)
+    infoPath = fileDir + "/../data/signalsDescription.csv"
+    signalsInformation = pd.read_csv(infoPath, sep=",")
 
     # only keep the interesting signals from the folder
-    files = [file for file in files if file in signalsInformation["fileName"].values]
+
+    usefulSignals = signalsInformation[signalsInformation["useful"] == 1]
+
+    if filterPlots:
+        files = [file for file in files if file in usefulSignals["fileName"].values]
 
     # If nbPlots is None, plot all signals
     if nbPlots is None:
@@ -78,11 +85,13 @@ def plotSignals(dataPath: str, savePath: str, options: PlotSignalsOptions = {}) 
     for file in files:
         i += 1
         if debug:
-            print("Plotting file ", i, " / ", nbPlots)
+            print("Plotting file ", i, "/", nbPlots)
 
-        plotSignal(dataPath + "/" + file, nbPoints)
+        plotSignal(dataPath + "/" + file, nbPoints, debug)
 
         # Save the plot
         fileName = file.split(".")[0]
         plt.savefig(saveFolderPath + "/" + fileName + ".svg", format="svg")
-        plt.close()
+
+    if debug:
+        print("Plots saved in ", saveFolderPath)
