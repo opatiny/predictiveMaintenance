@@ -14,5 +14,5 @@ from utils.plotSignals import plotSignals
 plotSignals(
     "data/Mecatis/Warmup_Mecatis_03_02_25",
     "results/",
-    {"debug": True, "filterPlots": True, "nbPlots": 5},
+    {"debug": True, "filterPlots": True, "nbPlots": 2},
 )

@@ -3,6 +3,7 @@
 import os
 import matplotlib.pyplot as plt
 import pandas as pd
+import time
 
 from utils import Utils
 from utils.plotSignal import plotSignal
@@ -87,11 +88,22 @@ def plotSignals(dataPath: str, savePath: str, options: PlotSignalsOptions = {}) 
         if debug:
             print("Plotting file ", i, "/", nbPlots)
 
+        # compute time to run plotSignal
+        start_time = time.time()
         plotSignal(dataPath + "/" + file, nbPoints, debug)
+        end_time = time.time()
+
+        if debug:
+            print(f"Time to plot signal: {end_time - start_time:.6f} seconds")
 
         # Save the plot
+        start_time = time.time()
         fileName = file.split(".")[0]
         plt.savefig(saveFolderPath + "/" + fileName + ".svg", format="svg")
+        end_time = time.time()
+
+        if debug:
+            print(f"Time to save figure: {end_time - start_time:.6f} seconds")
 
     if debug:
         print("Plots saved in ", saveFolderPath)
