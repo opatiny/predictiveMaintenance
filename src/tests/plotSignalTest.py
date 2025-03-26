@@ -11,7 +11,7 @@ print("parentDir: ", parentDir)
 
 sys.path.append(parentDir)
 
-from plotSignal import plotSignal
+from utils.plotSignal import plotSignal
 
 # get the current folder path
 currentPath = Path(__file__).resolve().parent

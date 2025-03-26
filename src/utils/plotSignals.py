@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from utils import Utils
-from plotSignal import plotSignal
+from utils.plotSignal import plotSignal
 
 from typing import TypedDict
 
@@ -61,7 +61,7 @@ def plotSignals(dataPath: str, savePath: str, options: PlotSignalsOptions = {}) 
     # Read signals descriptions
     fileAbsPath = os.path.abspath(__file__)
     fileDir = os.path.dirname(fileAbsPath)
-    infoPath = fileDir + "/../data/signalsDescription.csv"
+    infoPath = fileDir + "/../../data/signalsDescription.csv"
     signalsInformation = pd.read_csv(infoPath, sep=",")
 
     # only keep the interesting signals from the folder

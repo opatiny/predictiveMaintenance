@@ -13,7 +13,7 @@ print("parentDir: ", parentDir)
 sys.path.append(parentDir)
 
 # import functions
-from addSeries import addSeries
+from utils.addSeries import addSeries
 
 # get the current folder path
 currentPath = Path(__file__).resolve().parent
@@ -44,7 +44,7 @@ addSeries(path1, nbPoints)
 addSeries(path2, nbPoints)
 addSeries(path3, nbPoints)
 
-plt.legend([samplePath1, samplePath2, samplePath3])
+plt.legend([samplePath1, samplePath2, samplePath3], loc="upper right")
 plt.show()
 
 # Close all plots
