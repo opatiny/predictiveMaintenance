@@ -5,7 +5,7 @@ from utils.getFormattedSignalData import getFormattedSignalData
 from utils import Utils
 
 
-def plotSignal(filePath: str, nbPoints: int = None) -> None:
+def plotSignal(filePath: str, nbPoints: int = None, debug: bool = False) -> None:
     """
     Plot a signal from a csv file.
 
@@ -22,7 +22,7 @@ def plotSignal(filePath: str, nbPoints: int = None) -> None:
     filename = filePath.split("/")[-1]
 
     # Load data from csv file
-    data = getFormattedSignalData(filePath)
+    data = getFormattedSignalData(filePath, debug)
 
     # pick how many points to plot
     # If nbPlots is None, plot all signals

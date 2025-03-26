@@ -20,7 +20,7 @@ print(currentPath)
 relFolderPath = "../../data/Mecatis/Warmup_Mecatis_03_02_25/"
 fileName = "stSigAxCurrentB.csv"
 
-# concanetating the path
+# concatenating the path
 filePath = str(currentPath / relFolderPath / fileName)
 print("filePath: ", filePath)
 plotSignal(filePath, nbPoints=1000)

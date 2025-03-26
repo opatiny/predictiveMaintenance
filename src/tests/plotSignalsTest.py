@@ -11,9 +11,8 @@ sys.path.append(parentDir)
 
 from plotSignals import plotSignals
 
-
 plotSignals(
-    "data/Machine#1_Mecatis/Warmup_Mecatis_03_02_25",
+    "data/Mecatis/Warmup_Mecatis_03_02_25",
     "src/plots/",
-    {"debug": True, "filterPlots": False},
+    {"debug": True, "filterPlots": True, "nbPlots": 2},
 )

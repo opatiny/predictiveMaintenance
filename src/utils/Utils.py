@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 
 def getNormalizedTime(time: pd.Series) -> pd.Series:
@@ -25,7 +26,13 @@ def getYLabel(fileName: str) -> str:
     Get the label for the y-axis of a plot from a file name.
     """
 
-    signalsInformation = pd.read_csv("data/signalsDescription.csv", sep=",")
+    fileAbsPath = os.path.abspath(__file__)
+    fileDir = os.path.dirname(fileAbsPath)
+    infoPath = fileDir + "/../../data/signalsDescription.csv"
+
+    print(infoPath)
+    signalsInformation = pd.read_csv(infoPath, sep=",")
+
     signalIndex = signalsInformation[signalsInformation["fileName"] == fileName].index[
         0
     ]
