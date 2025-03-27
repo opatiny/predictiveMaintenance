@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 
+from sklearn.preprocessing import normalize
+
 
 # TIME UTILS
 def getNormalizedTime(time: pd.Series) -> pd.Series:
@@ -59,3 +61,13 @@ def removeDuplicates(signal: pd.DataFrame, debug: bool = False) -> pd.DataFrame:
         print(f"removeDuplicates - Number duplicates: {originalLength - newLength}")
 
     return signal
+
+
+def normalizeSignal(signal: pd.Series) -> pd.Series:
+    """
+    Normalize a signal between -1 and 1.
+    """
+    # normalize the signal between -1 and 1
+    signal = normalize(signal.values.reshape(-1, 1), axis=0, norm="max").reshape(-1)
+
+    return pd.Series(signal)

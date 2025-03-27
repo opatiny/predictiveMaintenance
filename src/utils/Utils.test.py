@@ -47,6 +47,16 @@ class TestUtils(unittest.TestCase):
         # Compare the DataFrames
         pd.testing.assert_frame_equal(data, expected)
 
+    def test_normalizeSignal(self):
+        data = pd.Series([-2, -1, 0.0, 1.0, 2.0])
+
+        expected = pd.Series([-1.0, -0.5, 0.0, 0.5, 1.0])
+
+        data = Utils.normalizeSignal(data)
+
+        # Compare the Series
+        pd.testing.assert_series_equal(data, expected)
+
 
 if __name__ == "__main__":
     unittest.main()

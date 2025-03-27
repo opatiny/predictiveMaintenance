@@ -2,9 +2,10 @@
 
 ## changelog
 
-- implemented normalization of the data to plot multiple different signals
 - more robust path handling (can call functions from various places without having path issues)
 - `plotSignals`: add automatic filtering of useful signals
+- implemented `normalizeSignal`
+- implemented `removeDuplicates`
 
 ## Compare ACS and MCS data
 
