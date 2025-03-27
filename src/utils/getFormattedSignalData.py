@@ -14,8 +14,6 @@ def getFormattedSignalData(
     filePath: str, normalize: bool = False, debug: bool = False
 ) -> pd.DataFrame:
 
-    print("TEST")
-
     # Load data from csv file
     data = pd.read_csv(filePath, sep=";", header=None, names=["timestamp", "value"])
 
@@ -31,12 +29,9 @@ def getFormattedSignalData(
     # convert time to seconds from beginning of array
     data.loc[:, "timeSeconds"] = Utils.getNormalizedTime(data.loc[:, "timestamp"])
 
-    print(data)
     # normalize the signal between -1 and 1
     if normalize:
         data.loc[:, "value"] = Utils.normalizeSignal(data.loc[:, "value"])
-
-    print(data)
 
     # Select only the desired columns
     formattedData = data[["timeSeconds", "value"]]
