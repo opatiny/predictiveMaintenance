@@ -24,21 +24,21 @@ samplePath1 = "Warmup_Mecatis_03_02_25"
 samplePath2 = "Warmup_Mecatis_05_02_25"
 samplePath3 = "Warmup_Mecatis_17_02_25"
 
-file1 = "stSigAxCurrentB.csv"
-file2 = "stSigAxPosACSB.csv"
-file3 = "stSigAxVeloACSB.csv"
+file1 = "stSigAxCurrentS.csv"
+file2 = "stSigSpindleVelocity.csv"
 
 
 # concanetating the path
-path1 = str(currentPath / machinePath / samplePath1 / file1)
-path2 = str(currentPath / machinePath / samplePath1 / file2)
-path3 = str(currentPath / machinePath / samplePath1 / file3)
 
-nbPoints = 300000
+samplePath = samplePath1
+path1 = str(currentPath / machinePath / samplePath / file1)
+path2 = str(currentPath / machinePath / samplePath / file2)
+
+nbPoints = None
 
 
 plt.figure()
-plt.title(samplePath1 + ": Current, position and velocity of axis B")
+plt.title(samplePath + ": Spindle current and target speed")
 plt.xlabel("Time [s]")
 plt.ylabel("Normalized signals")
 plt.grid(True)
@@ -47,10 +47,9 @@ baseOptions = {"nbPoints": nbPoints, "normalize": True}
 
 addSeries(path1, baseOptions)
 addSeries(path2, baseOptions)
-addSeries(path3, baseOptions)
 
 plt.legend(
-    ["Normalized current", "Normalized ACS position", "Normalized ACS velocity"],
+    ["Normalized current", "Normalized target speed"],
     loc="upper right",
 )
 plt.show()

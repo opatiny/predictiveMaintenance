@@ -15,23 +15,17 @@ def getFormattedSignalData(filePath: str, debug: bool = False) -> pd.DataFrame:
     data = pd.read_csv(filePath, sep=";", header=None, names=["timestamp", "value"])
 
     if debug:
-        print("Number of points to sort: ", data.shape[0])
+        print("getFormattedSignalData - Number of points to sort: ", data.shape[0])
 
     # sort data by time
-    start_time = time.time()
     data = data.sort_values(by="timestamp")
-    end_time = time.time()
 
-    if debug:
-        print(f"Time to sort: {end_time - start_time:.6f} seconds")
+    # remove duplicates
+    data = Utils.removeDuplicates(data, debug)
 
     # convert time to seconds from beginning of array
-    start_time = time.time()
-    data.loc[:, "timeSeconds"] = Utils.getNormalizedTime(data.loc[:, "timestamp"])
-    end_time = time.time()
 
-    if debug:
-        print(f"Time to normalize: {end_time - start_time:.6f} seconds")
+    data.loc[:, "timeSeconds"] = Utils.getNormalizedTime(data.loc[:, "timestamp"])
 
     # Select only the desired columns
     formattedData = data[["timeSeconds", "value"]]

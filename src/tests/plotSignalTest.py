@@ -23,7 +23,7 @@ fileName = "stSigAxCurrentB.csv"
 # concatenating the path
 filePath = str(currentPath / relFolderPath / fileName)
 print("filePath: ", filePath)
-plotSignal(filePath, nbPoints=1000)
+plotSignal(filePath, nbPoints=1000, debug=True)
 plt.show()
 
 # Close all plots

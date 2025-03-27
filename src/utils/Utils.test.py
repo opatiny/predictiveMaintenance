@@ -28,6 +28,25 @@ class TestUtils(unittest.TestCase):
 
         self.assertEqual(date, expected)
 
+    def test_removeDuplicates(self):
+        data = pd.DataFrame(
+            {
+                "timestamp": [10000000, 20000000, 20000000, 30000000],
+                1: [0.0, 0.1, 0.1, 0.2],
+            }
+        )
+
+        expected = pd.DataFrame(
+            {"timestamp": [10000000, 20000000, 30000000], 1: [0.0, 0.1, 0.2]}
+        )
+
+        data = Utils.removeDuplicates(data, True)
+        # reset index
+        data = data.reset_index(drop=True)
+
+        # Compare the DataFrames
+        pd.testing.assert_frame_equal(data, expected)
+
 
 if __name__ == "__main__":
     unittest.main()

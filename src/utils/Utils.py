@@ -2,6 +2,7 @@ import pandas as pd
 import os
 
 
+# TIME UTILS
 def getNormalizedTime(time: pd.Series) -> pd.Series:
     """
     Normalize timestamp in Microsoft filetime to seconds from beginning of array.
@@ -21,6 +22,7 @@ def getDate(timestamp: int) -> str:
     return pd.to_datetime(timestamp, unit="s").strftime("%Y-%m-%d %H:%M:%S")
 
 
+# PLOT UTILS
 def getYLabel(fileName: str) -> str:
     """
     Get the label for the y-axis of a plot from a file name.
@@ -40,3 +42,20 @@ def getYLabel(fileName: str) -> str:
     signalUnit = signalsInformation.loc[signalIndex, "unit"]
 
     return signalDescription + " [" + signalUnit + "]"
+
+
+# OTHER
+
+
+def removeDuplicates(signal: pd.DataFrame, debug: bool = False) -> pd.DataFrame:
+    """
+    Remove duplicates from a signal with timestamp and value columns.
+    """
+    originalLength = len(signal)
+    signal = signal.drop_duplicates(subset=["timestamp"], keep="first")
+    newLength = len(signal)
+
+    if debug:
+        print(f"removeDuplicates - Number duplicates: {originalLength - newLength}")
+
+    return signal
