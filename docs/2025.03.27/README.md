@@ -16,6 +16,7 @@ ACS is the axis reference frame for the positions and MCS the machine reference 
 ## Spindle temperature
 
 On the plot below, we see that the spindle temperature sensor was not connected properly (or had another issue) during the sample taken on the 3 feb.
+
 ![./spindle-temperature-mecatis.png](./spindle-temperature-mecatis.png)
 ![./spindle-temperature-mecatis-zoom.png](./spindle-temperature-mecatis-zoom.png)
 

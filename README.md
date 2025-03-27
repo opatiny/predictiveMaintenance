@@ -29,8 +29,8 @@ Time stamps are in Microsoft filetime format!!
   - stSigAxCurrentY
   - stSigAxCurrentZ
 - following error signals
-- axes positions -> seem to be oscillating -> fourier transform?
-- axes velocities?
+- axes positions
+- axes velocities
 - spindle power: stSigPowerMotS
 - commands:
   - stSigSpindleVelocity
