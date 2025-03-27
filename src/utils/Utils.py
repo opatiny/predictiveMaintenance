@@ -53,12 +53,16 @@ def removeDuplicates(signal: pd.DataFrame, debug: bool = False) -> pd.DataFrame:
     """
     Remove duplicates from a signal with timestamp and value columns.
     """
+
     originalLength = len(signal)
     signal = signal.drop_duplicates(subset=["timestamp"], keep="first")
     newLength = len(signal)
 
     if debug:
         print(f"removeDuplicates - Number duplicates: {originalLength - newLength}")
+
+    # reset index
+    signal = signal.reset_index(drop=True)
 
     return signal
 

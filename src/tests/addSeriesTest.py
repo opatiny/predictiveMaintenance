@@ -25,7 +25,7 @@ samplePath2 = "Warmup_Mecatis_05_02_25"
 samplePath3 = "Warmup_Mecatis_17_02_25"
 
 file1 = "stSigAxCurrentS.csv"
-file2 = "stSigSpindleVelocity.csv"
+file2 = "lrSigSpindleTemp.csv"
 
 
 # concanetating the path
@@ -43,9 +43,9 @@ plt.xlabel("Time [s]")
 plt.ylabel("Normalized signals")
 plt.grid(True)
 
-baseOptions = {"nbPoints": nbPoints, "normalize": True}
+baseOptions = {"nbPoints": nbPoints, "normalize": True, "debug": True}
 
-addSeries(path1, baseOptions)
+# addSeries(path1, baseOptions)
 addSeries(path2, baseOptions)
 
 plt.legend(

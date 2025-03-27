@@ -32,7 +32,7 @@ class TestUtils(unittest.TestCase):
         data = pd.DataFrame(
             {
                 "timestamp": [10000000, 20000000, 20000000, 30000000],
-                1: [0.0, 0.1, 0.1, 0.2],
+                1: [0.0, 0.1, 0.45, 0.2],
             }
         )
 

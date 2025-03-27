@@ -5,7 +5,7 @@ from typing import TypedDict
 from utils.getFormattedSignalData import getFormattedSignalData
 
 
-class AddSeriesOptinons(TypedDict):
+class AddSeriesOptions(TypedDict):
     """
     Options for the addSeries function.
 
@@ -17,21 +17,16 @@ class AddSeriesOptinons(TypedDict):
 
     nbPoints: int
     normalize: bool
+    debug: bool
 
 
-def addSeries(filePath: str, options: AddSeriesOptinons = {}) -> None:
+def addSeries(filePath: str, options: AddSeriesOptions = {}) -> None:
 
     nbPoints = options.get("nbPoints", None)
     normalize = options.get("normalize", False)
-    min = options.get("min", 0)
-    max = options.get("max", 1)
+    debug = options.get("debug", False)
 
-    data = getFormattedSignalData(filePath)
-
-    if normalize:
-        data.loc[:, "value"] = normalizeSignal(
-            data.loc[:, "value"].values.reshape(-1, 1), axis=0, norm="max"
-        ).reshape(-1)
+    data = getFormattedSignalData(filePath, normalize, debug)
 
     # pick how many points to plot
     # If nbPlots is None, plot all signals
