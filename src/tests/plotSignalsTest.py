@@ -13,7 +13,7 @@ from plotSignals import plotSignals
 
 
 plotSignals(
-    "data/Machine#1_Mecatis/Warmup_Mecatis_03_02_25",
-    "src/plots/",
+    "data/mecatis/Warmup_Mecatis_05_02_25",
+    "src/plots/mecatis/",
     {"debug": True, "filterPlots": False},
 )
