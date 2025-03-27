@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from utils.getFormattedSignalData import getFormattedSignalData
-from fft_utils import compute_fft_features
+from utils.fft import compute_fft_features
 from pca_utils import apply_pca
 from plot_utils import plot_signal
 
