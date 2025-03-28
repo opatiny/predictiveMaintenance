@@ -22,7 +22,7 @@ def process_signals_in_directory(input_dir, output_dir, dataset_name):
         process_signal_file(file_path, output_dir, dataset_name)
 
 if __name__ == "__main__":
-    input_directory = 'data/mecatis/Warmup_Mecatis_03_02_25'
-    output_directory = 'plots/mecatis/Warmup_Mecatis_03_02_25'
+    input_directory = 'data/mill/250320_Warmup_V5'
+    output_directory = 'plots/mill/250320_Warmup_V5'
     dataset_name = 'Warmup_Mecatis_03_02_25'
     process_signals_in_directory(input_directory, output_directory, dataset_name)
