@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 import math
 import os
 from pandas.core.frame import DataFrame
 
-from utils import Utils
+from utils.getFormattedSignalData import getFormattedSignalData
 
 
 def formatSampleData(folderPath: str, debug: bool = False) -> DataFrame:
@@ -12,36 +13,62 @@ def formatSampleData(folderPath: str, debug: bool = False) -> DataFrame:
     # Get all files in the folder
     files = os.listdir(folderPath)
     if debug:
-        print("files: ", files)
+        print("formatSampleData - number of files to process: ", len(files))
 
-    fileName = files[0].split(".")[0]
+    dfs = []
+    lengths = []
 
-    # Load data from csv file
-    formattedData = pd.read_csv(
-        folderPath + files[0], sep=";", header=None, names=["timestamp", fileName]
-    )
-
-    nbPoints = formattedData.shape[0]
+    # load all of the files
     if debug:
-        print("nbPoints: ", nbPoints)
+        print("formatSampleData - loading files")
 
-    for file in files[1:]:
-        # Load data from csv file
-        data = pd.read_csv(
-            folderPath + file, sep=";", header=None, names=["timestamp", "value"]
-        )
+    counter = 0
+    for file in files:
+        counter += 1
+        # Get signal data
+        signalData = getFormattedSignalData(folderPath + "/" + file, debug)
 
-        if data.shape[0] != nbPoints:
-            print(
-                "Error: the number of points in the files is different (folder: ",
-                folderPath,
-                ", file: ",
-                file,
-                ")",
-            )
-            return
+        dfs.append(signalData)
+        lengths.append(signalData.shape[0])
 
-        fileName = files[0].split(".")[0]
-        formattedData[fileName] = data["value"]
+        if debug:
+            print("file ", counter, "/", len(files))
 
-    return formattedData
+    # find signal with the most points
+    maxLength = max(lengths)
+    if debug:
+        print("formatSampleData - max nb of points: ", maxLength)
+    index = lengths.index(maxLength)
+
+    fileName = files[index].split(".")[0]
+
+    formattedSampleData = dfs[index]
+    formattedSampleData.rename(columns={"value": fileName}, inplace=True)
+
+    nbInterpolations = 0
+
+    if debug:
+        print("formatSampleData - interpolating signals")
+
+    # add other signals and interpolate if necessary
+    for i in range(len(dfs)):
+        fileName = files[i].split(".")[0]
+        if i != index:
+            if len(dfs[i]) < maxLength:
+                nbInterpolations += 1
+
+                # Interpolate the signal if less than the max length
+                interpolated = np.interp(
+                    formattedSampleData["timeSeconds"],
+                    dfs[i]["timeSeconds"],
+                    dfs[i]["value"],
+                )
+                formattedSampleData[fileName] = interpolated
+            else:
+                # Add the signal to the formatted data
+                formattedSampleData[fileName] = dfs[i]["value"]
+
+    if debug:
+        print("formatSampleData - Number of signals interpolatedd: ", nbInterpolations)
+
+    return formattedSampleData
