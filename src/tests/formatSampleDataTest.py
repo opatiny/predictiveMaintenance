@@ -29,6 +29,8 @@ data = formatSampleData(
     debug=True,
 )
 
+print("data: ", data.shape)
+
 # save data to csv file
 data.to_csv(
     "results" + "/formattedData.csv",

@@ -26,24 +26,27 @@ def formatSampleData(folderPath: str, debug: bool = False) -> DataFrame:
     for file in files:
         counter += 1
         # Get signal data
-        signalData = getFormattedSignalData(folderPath + "/" + file, debug)
+        signalData = getFormattedSignalData(
+            folderPath + "/" + file, normalize=False, debug=debug
+        )
 
         dfs.append(signalData)
         lengths.append(signalData.shape[0])
 
         if debug:
-            print("file ", counter, "/", len(files))
+            print("file: ", file, "(", counter, "/", len(files), ")")
 
     # find signal with the most points
     maxLength = max(lengths)
     if debug:
         print("formatSampleData - max nb of points: ", maxLength)
     index = lengths.index(maxLength)
-
     fileName = files[index].split(".")[0]
 
     formattedSampleData = dfs[index]
     formattedSampleData.rename(columns={"value": fileName}, inplace=True)
+
+    print(formattedSampleData.columns)
 
     nbInterpolations = 0
 
