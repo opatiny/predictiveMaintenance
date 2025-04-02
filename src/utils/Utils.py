@@ -1,3 +1,4 @@
+from datetime import datetime
 import pandas as pd
 import os
 
@@ -15,9 +16,29 @@ def normalizeCsvTime(time: pd.Series) -> pd.Series:
 
 def normalizeParquetTime(time: pd.Series) -> pd.Series:
     """
-    Normalize timestamp in parquet file to seconds from beginning of array.
+    Normalize time in parquet file to seconds from beginning of array.
     """
-    return time - time.iloc[0]
+    epochs = pd.Series()
+
+    for i in range(len(time)):
+        date = parseStringDate(time[i])
+        epoch = date.timestamp()
+        epochs[i] = epoch
+
+    return epochs - epochs[0]
+
+
+def parseStringDate(date: str) -> datetime:
+    """
+    Parse a string date in the format %Y-%m-%dT%H:%M:%S.%fZ or %Y-%m-%dT%H:%M:%SZ into a datetime object.
+    """
+    formats = ["%Y-%m-%dT%H:%M:%S.%fZ", "%Y-%m-%dT%H:%M:%SZ"]
+    for format in formats:
+        try:
+            return datetime.strptime(date, format)
+        except ValueError:
+            pass
+    raise ValueError("no valid date format found")
 
 
 def getDate(timestamp: int) -> str:
