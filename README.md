@@ -15,7 +15,7 @@ Just run the python test file as you would any other file.
 
 ## Time stamps
 
-Time stamps are in Microsoft filetime format!!
+Time stamps of the csv samples are in Microsoft filetime format!!
 
 "The FILETIME structure is a 64-bit value that represents the number of 100-nanosecond intervals that have elapsed since January 1, 1601, Coordinated Universal Time (UTC)."
 
@@ -35,6 +35,21 @@ Time stamps are in Microsoft filetime format!!
 - commands:
   - stSigSpindleVelocity
   - stSigOperation
+
+## Implementation
+
+### Data frames
+
+Data frames allow to store table like data. We have two main libraries that handle dataframes: `pandas` and `polars`. Apparently, `polars` is a lot faster though.
+
+https://blog.jetbrains.com/pycharm/2024/07/polars-vs-pandas/
+
+### Parsing string dates
+
+- initially wanted to use `datetime.strptime(date, format)`, but it's super slow (several minutes for 3e6 values...)
+- alternatives:
+  - `pandas.to_datetime()`
+  - `pendulum`
 
 ## Various notes
 
