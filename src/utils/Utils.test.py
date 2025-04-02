@@ -14,7 +14,7 @@ class TestUtils(unittest.TestCase):
 
         expected = pd.DataFrame({0: [0.0, 1.0, 2.0], 1: [0.0, 0.1, 0.2]})
 
-        data[0] = Utils.getNormalizedTime(data[0])
+        data[0] = Utils.normalizeCsvTime(data[0])
 
         # Compare the DataFrames
         pd.testing.assert_frame_equal(data, expected)

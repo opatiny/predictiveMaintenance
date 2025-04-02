@@ -5,12 +5,19 @@ from sklearn.preprocessing import normalize
 
 
 # TIME UTILS
-def getNormalizedTime(time: pd.Series) -> pd.Series:
+def normalizeCsvTime(time: pd.Series) -> pd.Series:
     """
     Normalize timestamp in Microsoft filetime to seconds from beginning of array.
     """
 
     return (time - time.iloc[0]) / 1e7
+
+
+def normalizeParquetTime(time: pd.Series) -> pd.Series:
+    """
+    Normalize timestamp in parquet file to seconds from beginning of array.
+    """
+    return time - time.iloc[0]
 
 
 def getDate(timestamp: int) -> str:

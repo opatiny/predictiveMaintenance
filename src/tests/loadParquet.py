@@ -1,3 +1,4 @@
+import polars as pl
 import os
 import sys
 from pathlib import Path
@@ -12,27 +13,16 @@ print("parentDir: ", parentDir)
 
 sys.path.append(parentDir)
 
-# import functions
-from utils.formatSampleData import formatSampleData
-
 # get the current folder path
 currentPath = Path(__file__).resolve().parent
 print(currentPath)
 
-machinePath = "../../data/Mecatis/"
-samplePath1 = "Warmup_Mecatis_03_02_25/"
+machinePath = "../../data/MILL/"
+samplePath1 = "13-03-2025_7h35.parquet"
 
 # load all data
-data = formatSampleData(
-    folderPath=str(currentPath / machinePath / samplePath1),
-    debug=True,
-)
-
+data = pl.read_parquet(str(currentPath / machinePath / samplePath1))
 print("data: ", data.shape)
-
-# save data to csv file
-data.to_csv(
-    "results" + "/formattedData.csv",
-    sep=";",
-    index=False,
-)
+print(data.columns)
+print(data.head())
+print(data.describe())

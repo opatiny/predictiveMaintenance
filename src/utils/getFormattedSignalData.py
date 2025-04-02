@@ -27,7 +27,7 @@ def getFormattedSignalData(
     data = Utils.removeDuplicates(data, debug)
 
     # convert time to seconds from beginning of array
-    data.loc[:, "timeSeconds"] = Utils.getNormalizedTime(data.loc[:, "timestamp"])
+    data.loc[:, "timeSeconds"] = Utils.normalizeCsvTime(data.loc[:, "timestamp"])
 
     # normalize the signal between -1 and 1
     if normalize:
