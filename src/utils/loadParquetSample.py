@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import polars as pl
 
@@ -23,21 +24,45 @@ def loadParquetSample(path: str, debug: bool = False) -> pd.DataFrame:
     # normalize time
     data["time"] = Utils.normalizeParquetTime(data["time"])
 
-    # delete columns that are full of NaN
-    data.dropna(axis=1, how="all", inplace=True)
+    # remove columns that are full of NaN
+    data = data.dropna(axis=1, how="all")
 
-    # remove duplicates
-    # tricky because the values alternate from one signal to another
-    first = Utils.removeDuplicatesFromParquet(data, keep="first", debug=debug)
-    first.dropna(axis=1, how="any", inplace=True)
-    last = Utils.removeDuplicatesFromParquet(data, keep="last", debug=debug)
-    last.dropna(axis=1, how="any", inplace=True)
+    # create correct time series
+    correctTime = data["time"].drop_duplicates()
+    correctTime = correctTime.reset_index(drop=True)
 
-    # merge the two dataframes along columns
-    data = pd.concat([first, last], axis=1)
+    nbPoints = len(correctTime)
+
+    finalData = pd.DataFrame()
+    finalData["time"] = correctTime
+
+    # format each signal
+    for col in data.columns:
+        if col != "time":
+            # remove duplicates
+            signalWithoutNan = data[col].dropna()
+
+            # interpolate if points are missing
+            if len(signalWithoutNan) != nbPoints:
+                timeWithoutNan = data["time"][signalWithoutNan.index]
+
+                correctSignal = np.interp(
+                    correctTime,
+                    timeWithoutNan,
+                    signalWithoutNan,
+                )
+
+                # add to final data
+                finalData[col] = correctSignal
+            else:
+                # add to final data
+                finalData[col] = signalWithoutNan
 
     if debug:
-        print("normalized data: ", data.shape)
-        print(data.head())
+        print("normalized data: ", finalData.shape)
+        print(finalData.head())
 
-    return data
+    # reset index
+    finalData = finalData.reset_index(drop=True)
+
+    return finalData
