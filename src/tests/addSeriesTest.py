@@ -13,7 +13,7 @@ print("parentDir: ", parentDir)
 sys.path.append(parentDir)
 
 # import functions
-from utils.addSeries import addSeries
+from src.plot.addSeries import addSeries
 
 # get the current folder path
 currentPath = Path(__file__).resolve().parent

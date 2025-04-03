@@ -32,6 +32,7 @@ https://fr.wikipedia.org/wiki/ISO_8601
 ### Signals that look interesting
 
 - spindle temperature: lrSigSpindleTemp
+- spindle indicator: also the spindle current!
 - axes currents
   - stSigAxCurrentB
   - stSigAxCurrentS
@@ -39,7 +40,7 @@ https://fr.wikipedia.org/wiki/ISO_8601
   - stSigAxCurrentY
   - stSigAxCurrentZ
 - following error signals
-- axes positions
+- axes positions (command)
 - axes velocities
 - spindle power: stSigPowerMotS
 - commands:
