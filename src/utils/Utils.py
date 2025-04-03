@@ -100,14 +100,14 @@ def removeDuplicatesFromCsv(signal: pd.DataFrame, debug: bool = False) -> pd.Dat
 
 
 def removeDuplicatesFromParquet(
-    signal: pd.DataFrame, debug: bool = False
+    signal: pd.DataFrame, keep: str = "first", debug: bool = False
 ) -> pd.DataFrame:
     """
     Remove duplicates from a sample that comes from a parquet file.
     """
 
     originalLength = len(signal)
-    signal = signal.drop_duplicates(subset=["time"], keep="last")
+    signal = signal.drop_duplicates(subset=["time"], keep=keep)
     newLength = len(signal)
 
     if debug:

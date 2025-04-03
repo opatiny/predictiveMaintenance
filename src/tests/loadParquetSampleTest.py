@@ -34,16 +34,13 @@ print("data: ", data.shape)
 print(data.head())
 
 # save n first rows as csv
-nbPoints = 1000
-data = data.head(nbPoints)
-
-#  data["time"] = data["time"].round(6)
+nbPoints = data.shape[0] // 1000
 
 print("saving test csv...")
-data.to_csv("./test.csv", sep=",", index=False)
+data.head(nbPoints).to_csv("./test.csv", sep=",", index=False)
 
 # plot data
 print("plotting data...")
 plt.figure()
-plt.plot(data["time"], data["stSigAxCurrentB"])
+plt.plot(data["stSigAxCurrentB"].dropna(), label="stSigAxCurrentB")
 plt.show()
