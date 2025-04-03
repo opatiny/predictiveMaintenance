@@ -13,13 +13,23 @@ Use warm-up data of micro5 milling machines in order to identify the current mac
 
 Just run the python test file as you would any other file.
 
-## Time stamps
+## Data format
+
+### Time stamps
+
+#### In `.csv` files
 
 Time stamps of the csv samples are in Microsoft filetime format!!
 
 "The FILETIME structure is a 64-bit value that represents the number of 100-nanosecond intervals that have elapsed since January 1, 1601, Coordinated Universal Time (UTC)."
 
-## Signals that look interesting
+#### In `.parquet` files
+
+`time` column contains time as date strings in ISO 8601.
+
+https://fr.wikipedia.org/wiki/ISO_8601
+
+### Signals that look interesting
 
 - spindle temperature: lrSigSpindleTemp
 - axes currents
@@ -36,6 +46,15 @@ Time stamps of the csv samples are in Microsoft filetime format!!
   - stSigSpindleVelocity
   - stSigOperation
 
+### Positions
+
+- ACS: tool reference frame
+- MCS: machine reference frame
+
+### Overrides
+
+Some of the signals are overrides of the user on the target value defined inside the program. This value is expressed as a percentage of the target value. For example, an override of 150% means that the current value is 1.5 times greater than the one in the program. If there is no user override, the override variables are at 100.
+
 ## Implementation
 
 ### Data frames
@@ -50,6 +69,7 @@ https://blog.jetbrains.com/pycharm/2024/07/polars-vs-pandas/
 - alternatives:
   - `pandas.to_datetime()`
   - `pendulum`
+  - `isotime`
 
 ## Various notes
 
