@@ -24,7 +24,7 @@ def getFormattedSignalData(
     data = data.sort_values(by="timestamp")
 
     # remove duplicates
-    data = Utils.removeDuplicates(data, debug)
+    data = Utils.removeDuplicatesFromCsv(data, debug)
 
     # convert time to seconds from beginning of array
     data.loc[:, "timeSeconds"] = Utils.normalizeCsvTime(data.loc[:, "timestamp"])

@@ -28,7 +28,9 @@ def normalizeParquetTime(time: pd.Series) -> pd.Series:
 
     seconds = dates.astype("int64") / 1e9
 
-    return seconds - seconds[0]
+    relativeTime = seconds - seconds.iloc[0]
+
+    return relativeTime.round(6)
 
 
 def parseStringDate(date: str) -> datetime:
@@ -79,15 +81,33 @@ def getYLabel(fileName: str) -> str:
 
 
 # OTHER
-
-
-def removeDuplicates(signal: pd.DataFrame, debug: bool = False) -> pd.DataFrame:
+def removeDuplicatesFromCsv(signal: pd.DataFrame, debug: bool = False) -> pd.DataFrame:
     """
     Remove duplicates from a signal with timestamp and value columns.
     """
 
     originalLength = len(signal)
     signal = signal.drop_duplicates(subset=["timestamp"], keep="first")
+    newLength = len(signal)
+
+    if debug:
+        print(f"removeDuplicates - Number duplicates: {originalLength - newLength}")
+
+    # reset index
+    signal = signal.reset_index(drop=True)
+
+    return signal
+
+
+def removeDuplicatesFromParquet(
+    signal: pd.DataFrame, debug: bool = False
+) -> pd.DataFrame:
+    """
+    Remove duplicates from a sample that comes from a parquet file.
+    """
+
+    originalLength = len(signal)
+    signal = signal.drop_duplicates(subset=["time"], keep="last")
     newLength = len(signal)
 
     if debug:

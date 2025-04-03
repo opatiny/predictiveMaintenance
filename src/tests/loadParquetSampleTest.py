@@ -26,7 +26,7 @@ samplePath1 = "13-03-2025_7h35.parquet"
 # load data
 print("loading data...")
 data = loadParquetSample(
-    os.path.join(currentPath, machinePath, samplePath1), debug=False
+    os.path.join(currentPath, machinePath, samplePath1), debug=True
 )
 
 print("data: ", data.shape)
@@ -36,6 +36,8 @@ print(data.head())
 # save n first rows as csv
 nbPoints = 1000
 data = data.head(nbPoints)
+
+#  data["time"] = data["time"].round(6)
 
 print("saving test csv...")
 data.to_csv("./test.csv", sep=",", index=False)

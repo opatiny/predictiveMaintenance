@@ -59,7 +59,7 @@ class TestUtils(unittest.TestCase):
             {"timestamp": [10000000, 20000000, 30000000], 1: [0.0, 0.1, 0.2]}
         )
 
-        data = Utils.removeDuplicates(data, True)
+        data = Utils.removeDuplicatesFromCsv(data, True)
         # reset index
         data = data.reset_index(drop=True)
 

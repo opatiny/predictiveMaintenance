@@ -21,6 +21,7 @@ def loadParquetSample(path: str, debug: bool = False) -> pd.DataFrame:
     # normalize time
     data["time"] = Utils.normalizeParquetTime(data["time"])
 
-    print("caca")
+    # remove duplicates
+    data = Utils.removeDuplicatesFromParquet(data, debug)
 
     return data
