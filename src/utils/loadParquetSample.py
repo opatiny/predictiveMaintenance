@@ -11,14 +11,14 @@ def loadParquetSample(path: str, debug: bool = False) -> pd.DataFrame:
     """
     # load all data
     data = pl.read_parquet(path)
+    # convert to pandas dataframe
+    data = data.to_pandas()
 
     if debug:
         print("data: ", data.shape)
         print(data.head())
 
     # normalize time
-    nulls = data["time"].is_null().any()
-    print("nulls: ", nulls)
     data["time"] = Utils.normalizeParquetTime(data["time"])
 
     print("caca")

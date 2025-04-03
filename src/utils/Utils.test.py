@@ -23,15 +23,15 @@ class TestUtils(unittest.TestCase):
         data = pd.DataFrame(
             {
                 "time": [
-                    "2025-02-03T08:40:13.000Z",
-                    "2025-02-03T08:40:14.000Z",
+                    "2025-02-03T08:40:13.00Z",
+                    "2025-02-03T08:40:14.200Z",
                     "2025-02-03T08:40:15Z",
                 ],
                 1: [0.0, 0.1, 0.2],
             }
         )
 
-        expected = pd.DataFrame({"time": [0.0, 1.0, 2.0], 1: [0.0, 0.1, 0.2]})
+        expected = pd.DataFrame({"time": [0.0, 1.2, 2.0], 1: [0.0, 0.1, 0.2]})
 
         data["time"] = Utils.normalizeParquetTime(data["time"])
 
