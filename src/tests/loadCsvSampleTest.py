@@ -13,7 +13,7 @@ print("parentDir: ", parentDir)
 sys.path.append(parentDir)
 
 # import functions
-from src.utils.loadCsvSample import loadCsvSample
+from src.parse.loadCsvSample import loadCsvSample
 
 # get the current folder path
 currentPath = Path(__file__).resolve().parent

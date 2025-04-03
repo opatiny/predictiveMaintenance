@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from src.utils.loadCsvSignal import loadCsvSignal
+from parse.loadCsvSignal import loadCsvSignal
 from utils import Utils
 
 

@@ -7,8 +7,9 @@ from utils import Utils
 def loadParquetSample(path: str, debug: bool = False) -> pd.DataFrame:
     """ "
     Load a sample in parquet format and return a pandas dataframe.
-    Removes duplicates and normalizes time.
-    Removes columns that are full of NaN.
+      - Removes duplicates and normalizes time.
+      - Removes columns that are full of NaN.
+      - Linearly interpolates missing points.
     """
 
     # load all data

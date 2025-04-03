@@ -2,12 +2,11 @@ import pandas as pd
 
 import os
 import sys
-import time
 
 # add current folder to path
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
-import Utils
+from utils import Utils
 
 
 def loadCsvSignal(

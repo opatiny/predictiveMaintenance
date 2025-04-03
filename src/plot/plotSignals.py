@@ -6,7 +6,7 @@ import pandas as pd
 import time
 
 from utils import Utils
-from utils.plotSignal import plotSignal
+from plotSignal import plotSignal
 
 from typing import TypedDict
 
