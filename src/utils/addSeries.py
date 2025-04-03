@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import normalize as normalizeSignal
 from typing import TypedDict
 
-from utils.getFormattedSignalData import getFormattedSignalData
+from src.utils.loadCsvSignal import loadCsvSignal
 
 
 class AddSeriesOptions(TypedDict):
@@ -26,7 +26,7 @@ def addSeries(filePath: str, options: AddSeriesOptions = {}) -> None:
     normalize = options.get("normalize", False)
     debug = options.get("debug", False)
 
-    data = getFormattedSignalData(filePath, normalize, debug)
+    data = loadCsvSignal(filePath, normalize, debug)
 
     # pick how many points to plot
     # If nbPlots is None, plot all signals

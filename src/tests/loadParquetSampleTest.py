@@ -21,13 +21,11 @@ currentPath = Path(__file__).resolve().parent
 print(currentPath)
 
 machinePath = "../../data/MILL/"
-samplePath1 = "13-03-2025_7h35.parquet"
+samplePath = "13-03-2025_7h35.parquet"
 
 # load data
 print("loading data...")
-data = loadParquetSample(
-    os.path.join(currentPath, machinePath, samplePath1), debug=True
-)
+data = loadParquetSample(os.path.join(currentPath, machinePath, samplePath), debug=True)
 
 print("data: ", data.shape)
 # print first rows
@@ -39,8 +37,11 @@ nbPoints = data.shape[0] // 1000
 print("saving test csv...")
 data.head(nbPoints).to_csv("./test.csv", sep=",", index=False)
 
+print("saving test parquet...")
+data.to_parquet("./test.parquet", index=False)
+
 # plot data
 print("plotting data...")
 plt.figure()
-plt.plot(data["stSigAxCurrentB"].dropna(), label="stSigAxCurrentB")
+plt.plot(data["time"], data["stSigAxCurrentB"], label="stSigAxCurrentB")
 plt.show()

@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import polars as pl
 
 from utils import Utils
 
@@ -13,12 +12,9 @@ def loadParquetSample(path: str, debug: bool = False) -> pd.DataFrame:
     """
 
     # load all data
-    data = pl.read_parquet(path)
-    # convert to pandas dataframe
-    data = data.to_pandas()
+    data = pd.read_parquet(path)
 
     if debug:
-        print("original data: ", data.shape)
         print(data.head())
 
     # normalize time

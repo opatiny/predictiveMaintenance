@@ -13,7 +13,7 @@ print("parentDir: ", parentDir)
 sys.path.append(parentDir)
 
 # import functions
-from utils.formatSampleData import formatSampleData
+from src.utils.loadCsvSample import loadCsvSample
 
 # get the current folder path
 currentPath = Path(__file__).resolve().parent
@@ -23,7 +23,7 @@ machinePath = "../../data/Mecatis/"
 samplePath1 = "Warmup_Mecatis_03_02_25/"
 
 # load all data
-data = formatSampleData(
+data = loadCsvSample(
     folderPath=str(currentPath / machinePath / samplePath1),
     debug=True,
 )

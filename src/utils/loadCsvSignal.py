@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 import Utils
 
 
-def getFormattedSignalData(
+def loadCsvSignal(
     filePath: str, normalize: bool = False, debug: bool = False
 ) -> pd.DataFrame:
 

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from utils.getFormattedSignalData import getFormattedSignalData
+from src.utils.loadCsvSignal import loadCsvSignal
 from utils import Utils
 
 
@@ -22,7 +22,7 @@ def plotSignal(filePath: str, nbPoints: int = None, debug: bool = False) -> None
     filename = filePath.split("/")[-1]
 
     # Load data from csv file
-    data = getFormattedSignalData(filePath, debug)
+    data = loadCsvSignal(filePath, debug)
 
     # pick how many points to plot
     # If nbPlots is None, plot all signals

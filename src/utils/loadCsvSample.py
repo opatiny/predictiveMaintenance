@@ -5,10 +5,10 @@ import math
 import os
 from pandas.core.frame import DataFrame
 
-from utils.getFormattedSignalData import getFormattedSignalData
+from src.utils.loadCsvSignal import loadCsvSignal
 
 
-def formatSampleData(folderPath: str, debug: bool = False) -> DataFrame:
+def loadCsvSample(folderPath: str, debug: bool = False) -> DataFrame:
 
     # Get all files in the folder
     files = os.listdir(folderPath)
@@ -26,7 +26,7 @@ def formatSampleData(folderPath: str, debug: bool = False) -> DataFrame:
     for file in files:
         counter += 1
         # Get signal data
-        signalData = getFormattedSignalData(
+        signalData = loadCsvSignal(
             folderPath + "/" + file, normalize=False, debug=debug
         )
 
