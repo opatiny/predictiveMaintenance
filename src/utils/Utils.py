@@ -19,12 +19,18 @@ def normalizeParquetTime(time: pd.Series) -> pd.Series:
     Normalize time in parquet file to seconds from beginning of array.
     """
 
-    formats = ["%Y-%m-%dT%H:%M:%S.%fZ", "%Y-%m-%dT%H:%M:%SZ"]
-    dates = pd.to_datetime(time, formats[0])
+    # add seconds decimals to the time string if required
+    time = time.str.replace(r"(\.\d+)?Z$", ".000000Z", regex=True)
 
-    epochs = dates.dt.timestamp()
+    dates = pd.to_datetime(time, errors="coerce")
 
-    return dates - dates[0]
+    print("dates: ", dates)
+
+    seconds = dates.astype("int64") / 1_000_000_000
+
+    print("epochs: ", seconds)
+
+    return seconds - seconds[0]
 
 
 def parseStringDate(date: str) -> datetime:
