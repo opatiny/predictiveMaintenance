@@ -1,7 +1,7 @@
 import pandas as pd
 
 from parse.loadParquetSample import loadParquetSample
-from parse.loadCsvSignal import loadCsvSignal
+from parse.loadCsvSample import loadCsvSample
 
 
 def loadSample(path: str, debug: bool = False) -> pd.DataFrame:
@@ -19,6 +19,6 @@ def loadSample(path: str, debug: bool = False) -> pd.DataFrame:
     if path.endswith(".parquet"):
         data = loadParquetSample(path, debug)
     else:
-        data = loadCsvSignal(path, debug)
+        data = loadCsvSample(path, debug)
 
     return data

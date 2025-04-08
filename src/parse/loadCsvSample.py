@@ -5,7 +5,7 @@ import math
 import os
 from pandas.core.frame import DataFrame
 
-from loadCsvSignal import loadCsvSignal
+from parse.loadCsvSignal import loadCsvSignal
 
 
 def loadCsvSample(folderPath: str, debug: bool = False) -> DataFrame:

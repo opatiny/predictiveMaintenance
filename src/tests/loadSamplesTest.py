@@ -13,12 +13,13 @@ sys.path.append(parentDir)
 
 # import functions
 from parse.loadSamples import loadSamples
+from parse.saveNormalizedSamples import saveNormalizedSamples
 
 # get the current folder path
 currentPath = Path(__file__).resolve().parent
 print(currentPath)
 
-machinePath = "../../data/MILL/"
+machinePath = "../../data/test/"
 
 # load all data
 data, names = loadSamples(
@@ -26,4 +27,14 @@ data, names = loadSamples(
     debug=True,
 )
 
-print("data: ", data)
+
+print("names: ", names)
+
+# save data to parquet files
+
+saveFolder = "normalized"
+savePath = currentPath / "../../data" / saveFolder
+
+print("savePath: ", savePath)
+
+saveNormalizedSamples(data, names, saveFolder)
