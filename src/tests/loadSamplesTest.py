@@ -2,6 +2,7 @@ import os
 import sys
 from pathlib import Path
 import matplotlib.pyplot as plt
+import pandas as pd
 
 # append parent directory to path
 fileAbsPath = os.path.abspath(__file__)
@@ -19,7 +20,7 @@ from parse.saveNormalizedSamples import saveNormalizedSamples
 currentPath = Path(__file__).resolve().parent
 print(currentPath)
 
-machinePath = "../../data/test/"
+machinePath = "../../data/Mecatis_new/"
 
 # load all data
 data, names = loadSamples(
@@ -37,4 +38,9 @@ savePath = currentPath / "../../data" / saveFolder
 
 print("savePath: ", savePath)
 
-saveNormalizedSamples(data, names, saveFolder)
+saveNormalizedSamples(data, names, savePath)
+
+# load the data back
+fileName = names[0] + ".parquet"
+
+loadedData = pd.read_parquet(savePath / fileName)

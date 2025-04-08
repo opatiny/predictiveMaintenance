@@ -37,10 +37,11 @@ def loadSamples(path: str, debug: bool = False) -> tuple:
         data = loadSample(os.path.join(path, sample))
         end = time.time()
         if debug:
-            print("Time to load: ", end - start, " seconds")
+            print("Time to load: ", round(end - start, 2), " seconds")
         allSamples.append(data)
 
         # append machine name to the sample name
-        names.append(f"{machineName}_{sample}")
+        fileName = sample.split(".")[0]  # remove the extension if it exists
+        names.append(f"{machineName}_{fileName}")
 
     return allSamples, names

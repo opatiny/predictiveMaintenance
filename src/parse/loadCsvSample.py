@@ -46,8 +46,6 @@ def loadCsvSample(folderPath: str, debug: bool = False) -> DataFrame:
     formattedSampleData = dfs[index]
     formattedSampleData.rename(columns={"value": fileName}, inplace=True)
 
-    print(formattedSampleData.columns)
-
     nbInterpolations = 0
 
     if debug:
