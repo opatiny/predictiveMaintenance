@@ -16,6 +16,11 @@ def detectConstantSegments(
     Returns:
     list: List of tuples with start and end indices of constant segments.
     """
+
+    # Check if the input series have same length
+    if len(x) != len(y):
+        raise ValueError("Input series must have the same length")
+
     length = len(x)
     start_index = 0
     constantSegments = []
