@@ -14,7 +14,7 @@ def detectConstantSegments(
     min_points (int): The minimum number of consecutive points for a segment to be considered constant.
 
     Returns:
-    list: List of tuples with start and end times of constant segments.
+    list: List of tuples with start and end indices of constant segments.
     """
     length = len(x)
     start_index = 0
@@ -27,8 +27,8 @@ def detectConstantSegments(
             if (i - start_index) >= min_points and y.iloc[start_index] != 0:
                 constantSegments.append(
                     (
-                        x.iloc[start_index],
-                        x.iloc[i - 1],
+                        start_index,
+                        i - 1,
                     )
                 )
 
@@ -36,15 +36,6 @@ def detectConstantSegments(
 
     # Check the last segment
     if (length - start_index) >= min_points and y.iloc[start_index] != 0:
-        constantSegments.append((x.iloc[start_index], x.iloc[-1]))
+        constantSegments.append((start_index, length - 1))
 
     return constantSegments
-
-
-# Example usage
-
-x = pd.Series([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-y = pd.Series([1, 1, 1, 2, 2, 2, 3, 3, 3, 3])
-
-constantSegments = detectConstantSegments(x, y, variation_threshold=0.1, min_points=3)
-print(constantSegments)
