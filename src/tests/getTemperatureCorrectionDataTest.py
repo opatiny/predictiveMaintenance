@@ -19,6 +19,8 @@ dataPath = "../../data/normalized-2025_04_08/"
 
 sample = "Mecatis_05_02_25.parquet"
 
-samplePath = Path(dataPath) / sample
+samplePath = fileDir / Path(dataPath) / sample
 
 data = getTemperatureCorrectionData(samplePath)
+
+print("data: ", data)

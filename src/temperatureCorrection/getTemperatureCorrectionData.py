@@ -30,9 +30,9 @@ def getTemperatureCorrectionData(
         currentSlots = computeSlotsAverage(currentSlots, timeSlot)
 
     # merge the data
-    data = pd.DataFrame()
-    data["timeSeconds"] = temperatureSlots["timeSeconds"]
-    data["temperature"] = temperatureSlots["value"]
-    data["current"] = currentSlots["value"]
+    result = pd.DataFrame()
+    result["timeSeconds"] = temperatureSlots["timeSeconds"]
+    result["temperature"] = temperatureSlots.iloc[:, 1]
+    result["current"] = currentSlots.iloc[:, 1]
 
-    return data
+    return result

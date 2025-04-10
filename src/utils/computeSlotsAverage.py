@@ -14,5 +14,10 @@ def computeSlotsAverage(signal: pd.DataFrame, dt: float = 10) -> pd.DataFrame:
     -------
     pd.DataFrame: A DataFrame with the average value of the signal in each slot.
     """
-    signal["slot"] = signal["timeSeconds"] // dt
-    return signal.groupby("slot").mean()
+    signal = signal.copy()
+    slots = signal.loc[:, "timeSeconds"] // dt
+    signal["slots"] = slots
+    signal = signal.groupby("slots").mean()
+    signal = signal.reset_index()
+    signal = signal.drop(columns=["slots"])
+    return signal
