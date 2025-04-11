@@ -70,9 +70,13 @@ def getYLabel(fileName: str) -> str:
 
     signalsInformation = pd.read_csv(infoPath, sep=",")
 
-    signalIndex = signalsInformation[signalsInformation["fileName"] == fileName].index[
-        0
-    ]
+    signalRow = signalsInformation[signalsInformation["fileName"] == fileName]
+
+    if len(signalRow) == 0:
+        print("Signal not found in signalsDescription.csv")
+        return "Value"
+
+    signalIndex = signalRow.index[0]
 
     signalDescription = signalsInformation.loc[signalIndex, "description"]
     signalUnit = signalsInformation.loc[signalIndex, "unit"]

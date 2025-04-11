@@ -9,10 +9,10 @@ print("parentDir: ", parentDir)
 
 sys.path.append(parentDir)
 
-from utils.plotSignals import plotSignals
+from plot.plotSignals import plotSignals
 
 plotSignals(
-    "data/Mecatis/Warmup_Mecatis_03_02_25",
+    "data/Mecatis/03_02_25",
     "results/",
-    {"debug": True, "filterPlots": True, "nbPlots": 2},
+    {"debug": True, "filterPlots": False, "nbPlots": None},
 )

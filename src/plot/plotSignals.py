@@ -5,8 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import time
 
-from utils import Utils
-from plotSignal import plotSignal
+from plot.plotSignal import plotSignal
 
 from typing import TypedDict
 
@@ -99,7 +98,8 @@ def plotSignals(dataPath: str, savePath: str, options: PlotSignalsOptions = {}) 
         # Save the plot
         start_time = time.time()
         fileName = file.split(".")[0]
-        plt.savefig(saveFolderPath + "/" + fileName + ".svg", format="svg")
+        # todo: very slow when using svg format
+        plt.savefig(saveFolderPath + "/" + fileName + ".png", format="png")
         end_time = time.time()
 
         if debug:
