@@ -18,7 +18,7 @@ currentPath = Path(__file__).resolve().parent
 print(currentPath)
 
 relFolderPath = "../../data/Mecatis/03_02_25/"
-fileName = "lrSigSpindleTemp.csv"
+fileName = "stSigSpindleVelocity.csv"
 
 # concatenating the path
 filePath = str(currentPath / relFolderPath / fileName)
