@@ -3,7 +3,7 @@ import pandas as pd
 
 def computeSlotsAverage(signal: pd.DataFrame, dt: float = 10) -> pd.DataFrame:
     """
-    Compute the average of the signal in each slot.
+    Compute the average of the signal in each time slot.
 
     Parameters
     ----------

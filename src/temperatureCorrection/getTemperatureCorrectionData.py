@@ -1,7 +1,7 @@
 from pathlib import Path
 import pandas as pd
 
-from utils.computeSlotsAverage import computeSlotsAverage
+from src.signalProcessing.computeSlotsAverage import computeSlotsAverage
 
 
 def getTemperatureCorrectionData(
