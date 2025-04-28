@@ -58,6 +58,11 @@ def getDate(timestamp: int) -> str:
     return pd.to_datetime(timestamp, unit="s").strftime("%Y-%m-%d %H:%M:%S")
 
 
+def getFrequency(data: pd.DataFrame) -> float:
+    frequency = 1 / data["timeSeconds"].diff().mean()
+    return frequency
+
+
 # PLOT UTILS
 def getYLabel(fileName: str) -> str:
     """

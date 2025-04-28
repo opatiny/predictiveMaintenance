@@ -4,7 +4,7 @@ from signalProcessing.computeSlotsAverage import computeSlotsAverage
 
 
 def getTemperatureCorrectionData(
-    data: pd.DataFrame, timeSlot: float = 10, debug: bool = False
+    data: pd.DataFrame, timeSlot: float = None, debug: bool = False
 ) -> pd.DataFrame:
     """
     Get the current and temperature data from a sample path.
@@ -13,7 +13,7 @@ def getTemperatureCorrectionData(
     ----------
     sample (pd.DataFrame): The data to process.
     timeSlot (float): The duration of each slot on which to average in seconds.
-        Defaults to 10 seconds.
+        No averaging by default.
     debug (bool, optional): Whether to print debug information. Defaults to True.
 
     Returns

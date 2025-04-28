@@ -1,5 +1,7 @@
 import pandas as pd
 
+from utils.Utils import getFrequency
+
 
 def removeSegmentsBeginning(
     segments: list[pd.DataFrame], timeToRemove: float = 0.5, debug: bool = False
@@ -8,12 +10,7 @@ def removeSegmentsBeginning(
     Remove the first timeToRemove seconds from each segment. Allows to only consider the steady state of the signal.
     """
 
-    # compute the frequency of the signal
-    averageDiff = 0
-    for i in range(len(segments) - 1):
-        averageDiff += segments[i + 1].iloc[0, 0] - segments[i].iloc[0, 0]
-    averageDiff /= len(segments) - 1
-    frequency = 1 / averageDiff  # in Hz
+    frequency = getFrequency(segments[0])  # frequency in Hz
 
     if debug:
         print("Frequency: ", frequency, "Hz")

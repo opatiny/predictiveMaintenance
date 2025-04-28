@@ -56,7 +56,7 @@ def showTempCorrectionPlots(data: list, sampleNames: list) -> None:
         )
     plt.xlabel("Temperature (°C)")
     plt.ylabel("Current (A)")
-    plt.title("Spindle temperature VS current")
+    plt.title("Spindle current VS temperature")
     plt.legend()
     plt.grid()
     plt.show()

@@ -75,13 +75,12 @@ def correctSpindleCurrent(
         regression = regressions[i]["polyFit"]
         # find expected constant current: first point of the averaged segment's regression
         initialCurrent = segmentsWithFit[i].loc[0, "polyFit"]
-        if debug:
-            print("Initial current: ", initialCurrent)
+        # if debug:
+        #     print("Initial current: ", initialCurrent)
         correctedCurrents.append(originalCurrent - (regression - initialCurrent))
         totalLength += len(correctedCurrents[i])
 
     # concatenate the corrected current
     correctedCurrent = pd.concat(correctedCurrents, ignore_index=True)
-    print("Corrected current dimensions: ", correctedCurrent.shape)
 
     return correctedCurrent
