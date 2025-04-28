@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from utils import getRmse
+from utils.getRmse import getRmse
 
 
 def getPolyFits(segments: list[pd.DataFrame], order: int = 1) -> list[np.poly1d]:

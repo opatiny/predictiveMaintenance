@@ -1,17 +1,25 @@
 import pandas as pd
-from signalProcessing import computeSlotsAverage, removeSegmentsBeginning, splitSignal
+from signalProcessing.splitSignal import splitSignal
+from signalProcessing.removeSegmentsBeginning import removeSegmentsBeginning
+from signalProcessing.computeSlotsAverage import computeSlotsAverage
+from temperatureCorrection.getTemperatureCorrectionData import (
+    getTemperatureCorrectionData,
+)
+from utils.detectConstantSegments import detectConstantSegments
 from utils.polyFit import evalModels, getPolyFits, getRelativeErrors
+import time as timeLib
 
 
-def temperatureCorrection(
-    data: pd.DataFrame, segmentIndices: list[tuple], order: int = 3, debug: bool = False
+def correctSpindleCurrent(
+    rawData: pd.DataFrame,
+    order: int = 3,
+    debug: bool = False,
 ) -> pd.Series:
     """
-    Apply temperature correction to the data.
+    Apply temperature correction to spindle current.
     Parameters
     ----------
-    data (pd.DataFrame): The data to correct. Should contain the columns "timeSeconds", "temperature" and "current".
-    segmentIndices (list): The indices of the start and end of each segment.
+    data (pd.DataFrame): The sample data. The function will correct the spindle current.
     order (int): The order of the polynomial fit.
     debug (bool): If True, print debug information.
 
@@ -19,6 +27,16 @@ def temperatureCorrection(
     -------
     pd.Series: The corrected spindle current.
     """
+
+    # format data
+    time = rawData["timeSeconds"]
+    command = rawData["stSigSpindleVelocity"]
+    startTime = timeLib.time()
+    segmentIndices = detectConstantSegments(time, command)
+    endTime = timeLib.time()
+    print("Time to find constant segments: ", endTime - startTime)
+    data = getTemperatureCorrectionData(rawData, timeSlot=None)
+
     segments = splitSignal(data, segmentIndices)
     # remove beginning of the signals
     cutSegments = removeSegmentsBeginning(segments, debug=debug)
