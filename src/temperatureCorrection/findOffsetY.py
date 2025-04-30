@@ -8,19 +8,19 @@ def errorFun(x: float, data: pd.Series, reference: pd.Series) -> float:
     return error
 
 
-def findTemperatureOffset(temperature: pd.Series, reference: pd.Series) -> float:
+def findOffsetY(signal: pd.Series, reference: pd.Series) -> float:
     """
-    Find the temperature offset that minimizes the error between the temperature and reference.
+    Find the y offset that minimizes the error between the signal and reference.
 
     Parameters
     ----------
-    temperature (pd.Series): The temperature data.
+    signal (pd.Series): The signal data.
     reference (pd.Series): The reference data.
 
     Returns
     -------
-    float: The temperature offset.
+    float: The optimal y offset.
     """
     x0 = 0.0  # start with an offset of 0°C
-    result = minimize(errorFun, x0, args=(temperature, reference))
+    result = minimize(errorFun, x0, args=(signal, reference))
     return result.x[0], np.sqrt(result.fun)  # return the offset and the rmse
