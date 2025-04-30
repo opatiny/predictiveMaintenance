@@ -1,4 +1,6 @@
 import pandas as pd
+import time as timeLib
+
 from signalProcessing.splitSignal import splitSignal
 from signalProcessing.removeSegmentsBeginning import removeSegmentsBeginning
 from signalProcessing.computeSlotsAverage import computeSlotsAverage
@@ -7,11 +9,12 @@ from temperatureCorrection.getTemperatureCorrectionData import (
 )
 from utils.detectConstantSegments import detectConstantSegments
 from utils.polyFit import evalModels, getPolyFits, getRelativeErrors
-import time as timeLib
+from utils.getFullSegmentIndices import getFullSegmentIndices
 
 
 def correctSpindleCurrent(
     rawData: pd.DataFrame,
+    segmentIndices: list,
     order: int = 3,
     debug: bool = False,
 ) -> pd.Series:
@@ -20,6 +23,7 @@ def correctSpindleCurrent(
     Parameters
     ----------
     data (pd.DataFrame): The sample data. The function will correct the spindle current.
+    segmentIndices (list): List of tuples with start and end indices of segments without transitions.
     order (int): The order of the polynomial fit.
     debug (bool): If True, print debug information.
 
@@ -29,10 +33,7 @@ def correctSpindleCurrent(
     """
 
     # format data
-    time = rawData["timeSeconds"]
-    command = rawData["stSigSpindleVelocity"]
     startTime = timeLib.time()
-    segmentIndices = detectConstantSegments(time, command)
     endTime = timeLib.time()
     print("Time to find constant segments: ", endTime - startTime)
     data = getTemperatureCorrectionData(rawData, timeSlot=None)
@@ -52,15 +53,8 @@ def correctSpindleCurrent(
         print("Relative error in percents for each segment: ")
         print(errors.round(0))
 
-    # we want to apply the temperature correction to all points
-    # redefine segment indices
-    correctionIndices = []
-    firstSegment = [0, segmentIndices[0][1]]
-    correctionIndices.append(firstSegment)
-    for i in range(1, len(segmentIndices)):
-        start = segmentIndices[i - 1][1] + 1
-        end = segmentIndices[i][1]
-        correctionIndices.append([start, end])
+    # redefine segment indices to consider all points
+    correctionIndices = getFullSegmentIndices(segmentIndices)
     if debug:
         print("Correction indices: ", correctionIndices)
 
@@ -69,7 +63,6 @@ def correctSpindleCurrent(
 
     # subtract the polynomial fit from the initial data
     correctedCurrents = []
-    totalLength = 0
     for i in range(len(correctionSegments)):
         originalCurrent = correctionSegments[i]["current"]
         regression = regressions[i]["polyFit"]
@@ -78,7 +71,6 @@ def correctSpindleCurrent(
         # if debug:
         #     print("Initial current: ", initialCurrent)
         correctedCurrents.append(originalCurrent - (regression - initialCurrent))
-        totalLength += len(correctedCurrents[i])
 
     # concatenate the corrected current
     correctedCurrent = pd.concat(correctedCurrents, ignore_index=True)

@@ -1,15 +1,15 @@
 import pandas as pd
+import time as timeLib
 
 
 def detectConstantSegments(
-    x: pd.Series, y: pd.Series, variation_threshold=0, min_points=5
+    data: pd.DataFrame, variation_threshold=0, min_points=5, debug=False
 ):
     """
     Detect constant segments in the signal 'stSigSpindleVelocity', excluding segments where value is zero.
 
     Parameters:
-    x (pd.Series): Time series data.
-    y (pd.Series): Signal data.
+    data (pd.DataFrame): The input data containing 'timeSeconds' and 'stSigSpindleVelocity' series.
     variation_threshold (float): The maximum allowed variation to consider the signal as constant.
     min_points (int): The minimum number of consecutive points for a segment to be considered constant.
 
@@ -17,19 +17,20 @@ def detectConstantSegments(
     list: List of tuples with start and end indices of constant segments.
     """
 
-    # Check if the input series have same length
-    if len(x) != len(y):
-        raise ValueError("Input series must have the same length")
+    startTime = timeLib.time()
 
-    length = len(x)
+    time = data["timeSeconds"]
+    command = data["stSigSpindleVelocity"]
+
+    length = len(time)
     start_index = 0
     constantSegments = []
 
     for i in range(1, length):
-        value_diff = abs(y.iloc[i] - y.iloc[i - 1])
+        value_diff = abs(command.iloc[i] - command.iloc[i - 1])
 
         if value_diff > variation_threshold:
-            if (i - start_index) >= min_points and y.iloc[start_index] != 0:
+            if (i - start_index) >= min_points and command.iloc[start_index] != 0:
                 constantSegments.append(
                     (
                         start_index,
@@ -40,7 +41,11 @@ def detectConstantSegments(
             start_index = i  # Reset start_index for new segment
 
     # Check the last segment
-    if (length - start_index) >= min_points and y.iloc[start_index] != 0:
+    if (length - start_index) >= min_points and command.iloc[start_index] != 0:
         constantSegments.append((start_index, length - 1))
+
+    endTime = timeLib.time()
+    if debug:
+        print("Time to find constant segments: ", endTime - startTime)
 
     return constantSegments
