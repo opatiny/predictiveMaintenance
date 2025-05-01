@@ -33,9 +33,6 @@ def correctSpindleCurrent(
     """
 
     # format data
-    startTime = timeLib.time()
-    endTime = timeLib.time()
-    print("Time to find constant segments: ", endTime - startTime)
     data = getTemperatureCorrectionData(rawData, timeSlot=None)
 
     segments = splitSignal(data, segmentIndices)
@@ -62,6 +59,7 @@ def correctSpindleCurrent(
     regressions = evalModels(correctionSegments, models)
 
     # subtract the polynomial fit from the initial data
+    # this way current is independent from the temperature
     correctedCurrents = []
     for i in range(len(correctionSegments)):
         originalCurrent = correctionSegments[i]["current"]

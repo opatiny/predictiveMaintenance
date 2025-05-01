@@ -13,18 +13,19 @@ def plotSegments(
     legend: list[str] = [],
 ) -> None:
     """
-    Plot the segments of the signal. You can plot multiple signals in the same plot.
+    Plot the segments of the sample. You can plot multiple signals in the same plot by specifying ySignals.
     The segments are plotted in a 2x3 grid.
 
     Parameters
     ----------
-    segments (list[pd.DataFrame]): The segments of the signal. Each signal must only have 2 columns.
+    segments (list[pd.DataFrame]): The segments of the signal.
     xSignal (str): The name of the x signal.
-    ySignals (str): The name of the y signals.
+    ySignals (list[str]): The name of the y signals to plot.
     nbPoints (int): The number of points to plot. If None, all points are plotted.
     title (str): The title of the plot.
     xlabel (str): The label of the x-axis.
     ylabel (str)]: The label of the y-axis.
+    legend (list[str]): The legend of the plot. If empty, no legend is displayed.
 
     Returns
     -------

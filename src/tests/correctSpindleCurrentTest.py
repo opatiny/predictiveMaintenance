@@ -12,6 +12,7 @@ parentDir = os.path.dirname(fileDir)
 
 sys.path.append(parentDir)
 
+from utils.detectConstantSegments import detectConstantSegments
 from temperatureCorrection.correctSpindleCurrent import correctSpindleCurrent
 
 
@@ -32,19 +33,27 @@ for sample in samples:
     samplePath = fileDir / Path(dataPath) / sample
     data = pd.read_parquet(samplePath)
 
+    segmentIndices = detectConstantSegments(data)
+
     # Correct the spindle current
-    correctedCurrent = correctSpindleCurrent(data, debug=True)
+    correctedCurrent = correctSpindleCurrent(data, segmentIndices, debug=True)
 
     # Plot the corrected spindle current
     plt.plot(
-        data["timeSeconds"], data["stSigAxCurrentS"], "o-", markersize=3, label=sample
+        data["lrSigSpindleTemp"],
+        data["stSigAxCurrentS"],
+        "o-",
+        markersize=3,
+        label=sample,
     )
-    plt.plot(data["timeSeconds"], correctedCurrent, "o-", markersize=3, label=sample)
+    plt.plot(
+        data["lrSigSpindleTemp"], correctedCurrent, "o-", markersize=3, label=sample
+    )
 
-plt.xlabel("Time (s)")
+plt.xlabel("Temperature (°C)")
 plt.ylabel("Current (A)")
 plt.legend(["1", "1 corrected", "2", "2 corrected", "3", "3 corrected"])
-plt.title("Corrected spindle current for different samples")
+plt.title("Corrected spindle current versus temperature for different samples")
 plt.grid()
 
 plt.show()
