@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import normalize as normalizeSignal
 from typing import TypedDict
 
-from src.parse.loadCsvSignal import loadCsvSignal
+from parse.loadCsvSignal import loadCsvSignal
 
 
 class AddSeriesOptions(TypedDict):

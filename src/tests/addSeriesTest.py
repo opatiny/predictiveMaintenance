@@ -13,16 +13,16 @@ print("parentDir: ", parentDir)
 sys.path.append(parentDir)
 
 # import functions
-from src.plot.addSeries import addSeries
+from plot.addSeries import addSeries
 
 # get the current folder path
 currentPath = Path(__file__).resolve().parent
 print(currentPath)
 
 machinePath = "../../data/Mecatis/"
-samplePath1 = "Warmup_Mecatis_03_02_25"
-samplePath2 = "Warmup_Mecatis_05_02_25"
-samplePath3 = "Warmup_Mecatis_17_02_25"
+samplePath1 = "03_02_25"
+samplePath2 = "05_02_25"
+samplePath3 = "17_02_25"
 
 file1 = "stSigAxCurrentS.csv"
 file2 = "lrSigSpindleTemp.csv"
