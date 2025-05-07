@@ -20,14 +20,13 @@ from parse.saveNormalizedSamples import saveNormalizedSamples
 currentPath = Path(__file__).resolve().parent
 print(currentPath)
 
-machinePath = "../../data/Mecatis_new/"
+machinePath = "../../data/MILL/"
 
 # load all data
 data, names = loadSamples(
     str(currentPath / machinePath),
     debug=True,
 )
-
 
 print("names: ", names)
 

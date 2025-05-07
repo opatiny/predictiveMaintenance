@@ -54,6 +54,8 @@ def loadParquetSample(path: str, debug: bool = False) -> pd.DataFrame:
             else:
                 # add to final data
                 finalData[col] = signalWithoutNan
+    # rename time column
+    finalData = finalData.rename(columns={"time": "timeSeconds"})
 
     if debug:
         print("normalized data: ", finalData.shape)
