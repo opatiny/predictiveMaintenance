@@ -2,7 +2,7 @@ import pandas as pd
 
 
 def findCommonSection(
-    signal: pd.Series, reference: pd.Series, offset: int = 0
+    signal: pd.Series, reference: pd.Series, offset: int = 0, debug: bool = False
 ) -> pd.DataFrame:
     """
     Find the common section between the signal and reference. Signal and reference can have different lengths.
@@ -22,10 +22,10 @@ def findCommonSection(
     refStart = max(0, offset)
     sigEnd = min(len(signal) - 1, len(reference) - offset - 1)
     refEnd = min(len(reference) - 1, len(signal) + offset - 1)
-
-    print(
-        f"sigStart: {sigStart}, refStart: {refStart}, sigEnd: {sigEnd}, refEnd: {refEnd}"
-    )
+    if debug:
+        print(
+            f"sigStart: {sigStart}, refStart: {refStart}, sigEnd: {sigEnd}, refEnd: {refEnd}"
+        )
 
     # ignore index
     return pd.DataFrame(
