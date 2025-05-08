@@ -1,10 +1,13 @@
+from pathlib import Path
 import unittest
 import pandas as pd
 import sys
 
-sys.path.append("/src/utils")
+# this is ugly and not very robust
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 
-from findCommonSection import findCommonSection
+
+from utils.findCommonSection import findCommonSection
 
 
 class TestFindCommonSection(unittest.TestCase):
@@ -33,7 +36,7 @@ class TestFindCommonSection(unittest.TestCase):
 
         pd.testing.assert_frame_equal(result, expected)
 
-    def test_positiveOffset(self):
+    def test_negativeOffset(self):
         reference = pd.Series([1, 2, 3, 4, 5, 6, 7, 8])
         signal = pd.Series([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
         offset = -3

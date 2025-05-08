@@ -1,8 +1,10 @@
+from pathlib import Path
 import unittest
 import pandas as pd
 import sys
 
-sys.path.append("/src/utils")
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent / "utils"))
+
 
 import Utils
 
