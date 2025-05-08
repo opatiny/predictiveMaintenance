@@ -1,10 +1,14 @@
 import numpy as np
 import pandas as pd
 
+from parse.getCurrentSignals import getCurrentSignals
+from parse.convertToAmperes import convertToAmperes
 from utils import Utils
 
 
-def loadParquetSample(path: str, debug: bool = False) -> pd.DataFrame:
+def loadParquetSample(
+    path: str, currentUnit: str = "A", debug: bool = False
+) -> pd.DataFrame:
     """ "
     Load a sample in parquet format and return a pandas dataframe.
       - Removes duplicates and normalizes time.
@@ -33,6 +37,9 @@ def loadParquetSample(path: str, debug: bool = False) -> pd.DataFrame:
     finalData = pd.DataFrame()
     finalData["time"] = correctTime
 
+    # if necessary, convert current to Amperes
+    currentSignals = getCurrentSignals()
+
     # format each signal
     for col in data.columns:
         if col != "time":
@@ -54,7 +61,12 @@ def loadParquetSample(path: str, debug: bool = False) -> pd.DataFrame:
             else:
                 # add to final data
                 finalData[col] = signalWithoutNan
-    # rename time column
+
+            # convert currents to Amperes
+            if col in currentSignals:
+                finalData[col] = convertToAmperes(finalData[col], currentUnit)
+
+    # rename time column to timeSeconds
     finalData = finalData.rename(columns={"time": "timeSeconds"})
 
     if debug:

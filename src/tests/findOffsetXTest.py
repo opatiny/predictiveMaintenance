@@ -15,7 +15,7 @@ print("parentDir: ", parentDir)
 
 sys.path.append(parentDir)
 
-dataPath: Path = "../../data/normalized-2025_04_08/"
+dataPath: Path = "../../data/normalized-2025_05_08/"
 
 sampleNames = [
     "Mecatis_05_02_25.parquet",
@@ -24,7 +24,7 @@ sampleNames = [
     "MILL_13-03-2025_7h35.parquet",
 ]
 
-inMillisAmperes = [1, 1, 0, 0]
+inMillisAmperes = [0, 0, 0, 0]
 
 correctedDatas: list[pd.DataFrame] = []
 

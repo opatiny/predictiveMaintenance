@@ -1,10 +1,11 @@
+from matplotlib import path
 import pandas as pd
 
 from parse.loadParquetSample import loadParquetSample
 from parse.loadCsvSample import loadCsvSample
 
 
-def loadSample(path: str, debug: bool = False) -> pd.DataFrame:
+def loadSample(path: str, currentUnit: str = "A", debug: bool = False) -> pd.DataFrame:
     """
     Load a sample in parquet or csv format and return a pandas dataframe.
 
@@ -17,8 +18,8 @@ def loadSample(path: str, debug: bool = False) -> pd.DataFrame:
     """
     # check if sample is parquet or csv
     if path.endswith(".parquet"):
-        data = loadParquetSample(path, debug)
+        data = loadParquetSample(path, currentUnit, debug)
     else:
-        data = loadCsvSample(path, debug)
+        data = loadCsvSample(path, currentUnit, debug)
 
     return data

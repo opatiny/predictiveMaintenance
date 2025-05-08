@@ -1,15 +1,28 @@
-import matplotlib.pyplot as plt
-import pandas as pd
 import numpy as np
-import math
 import os
 from pandas.core.frame import DataFrame
 
 from parse.loadCsvSignal import loadCsvSignal
+from parse.getCurrentSignals import getCurrentSignals
+from parse.convertToAmperes import convertToAmperes
 
 
-def loadCsvSample(folderPath: str, debug: bool = False) -> DataFrame:
+def loadCsvSample(
+    folderPath: str, currentUnit: str = "A", debug: bool = False
+) -> DataFrame:
+    """
+    Load a sample in csv format and return a pandas dataframe.
+      - Removes duplicates and normalizes time.
+      - Removes columns that are full of NaN.
+      - Linearly interpolates missing points.
+      - Converts current to Amperes if necessary.
 
+    Parameters
+    ----------
+    folderPath (str): The path to the folder containing the csv files.
+    currentUnit (str): The unit of the current signals. Default is "A". Other options are "mA".
+    debug (bool): If True, print debug information. Default is False.
+    """
     # Get all files in the folder
     files = os.listdir(folderPath)
     if debug:
@@ -22,6 +35,9 @@ def loadCsvSample(folderPath: str, debug: bool = False) -> DataFrame:
     if debug:
         print("formatSampleData - loading files")
 
+    # if necessary, convert current to Amperes
+    currentSignals = getCurrentSignals()
+
     counter = 0
     for file in files:
         counter += 1
@@ -29,6 +45,11 @@ def loadCsvSample(folderPath: str, debug: bool = False) -> DataFrame:
         signalData = loadCsvSignal(
             folderPath + "/" + file, normalize=False, debug=debug
         )
+
+        # convert current to Amperes if necessary
+        signalName = file.split(".")[0]
+        if signalName in currentSignals:
+            signalData = convertToAmperes(signalData, currentUnit)
 
         dfs.append(signalData)
         lengths.append(signalData.shape[0])

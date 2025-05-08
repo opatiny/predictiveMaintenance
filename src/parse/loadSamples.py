@@ -5,7 +5,7 @@ import pandas as pd
 from parse.loadSample import loadSample
 
 
-def loadSamples(path: str, debug: bool = False) -> tuple:
+def loadSamples(path: str, currentUnit: str = "A", debug: bool = False) -> tuple:
     """
     Load all samples from a folder.
 
@@ -34,7 +34,7 @@ def loadSamples(path: str, debug: bool = False) -> tuple:
         if debug:
             print("Loading sample: ", sample)
         start = time.time()
-        data = loadSample(os.path.join(path, sample))
+        data = loadSample(os.path.join(path, sample), currentUnit=currentUnit)
         end = time.time()
         if debug:
             print("Time to load: ", round(end - start, 2), " seconds")

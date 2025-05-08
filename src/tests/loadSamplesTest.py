@@ -1,7 +1,6 @@
 import os
 import sys
 from pathlib import Path
-import matplotlib.pyplot as plt
 import pandas as pd
 
 # append parent directory to path
@@ -20,11 +19,12 @@ from parse.saveNormalizedSamples import saveNormalizedSamples
 currentPath = Path(__file__).resolve().parent
 print(currentPath)
 
-machinePath = "../../data/MILL/"
+machinePath = "../../data/Mecatis/"
 
 # load all data
 data, names = loadSamples(
     str(currentPath / machinePath),
+    currentUnit="mA",
     debug=True,
 )
 

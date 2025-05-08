@@ -10,7 +10,7 @@ from utils import Utils
 
 
 def loadCsvSignal(
-    filePath: str, normalize: bool = False, debug: bool = False
+    filePath: str, normalize: bool = False,  debug: bool = False
 ) -> pd.DataFrame:
 
     # Load data from csv file
