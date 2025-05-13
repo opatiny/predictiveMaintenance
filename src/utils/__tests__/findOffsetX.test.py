@@ -19,9 +19,16 @@ class TestFindOffsetX(unittest.TestCase):
 
         offset = findOffsetX(signal, reference)
 
-        print("Offset: ", offset)
-
         self.assertEqual(offset, 2)
+
+    def test_negativeOffset(self):
+
+        signal = pd.Series([0, 0, 0, 1, 2, 3, 4, 5])
+        reference = pd.Series([1, 2, 3, 4, 5, 0, 0, 0, 0, 0])
+
+        offset = findOffsetX(signal, reference)
+
+        self.assertEqual(offset, -3)
 
 
 if __name__ == "__main__":
