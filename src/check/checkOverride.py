@@ -11,7 +11,7 @@ def checkOverride(
         sample (pd.DataFrame): The sample to check.
 
     Returns:
-        bool: 0 if not modified, 1 if modified.
+        Dataframe indicating if override signals were modified, and corresponding indices.
     """
     overrideSignals = ["lrSigFeedRateOverride", "lrSigSpindleOverride"]
 

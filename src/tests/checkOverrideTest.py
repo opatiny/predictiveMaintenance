@@ -11,7 +11,7 @@ print("parentDir: ", parentDir)
 
 sys.path.append(parentDir)
 
-from utils.checkOverride import checkOverride
+from check.checkOverride import checkOverride
 
 currentPath = Path(__file__).resolve().parent
 print(currentPath)

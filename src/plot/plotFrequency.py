@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def plotFrequency(time: pd.Series, sampleName: str = "sample") -> None:
+def plotFrequency(time: pd.Series, sampleName: str = "sample", ylimits=False) -> None:
     """
     Plot the frequency of the time series.
 
@@ -33,5 +33,7 @@ def plotFrequency(time: pd.Series, sampleName: str = "sample") -> None:
     plt.title(sampleName + ": Sampling frequency")
     plt.xlabel("Index")
     plt.ylabel("Frequency [Hz]")
+    if ylimits:
+        plt.ylim(0, frequency.max() * 1.1)
     plt.grid()
     plt.show()
