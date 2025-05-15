@@ -1,9 +1,8 @@
-import polars as pl
 import os
 import sys
 from pathlib import Path
 import matplotlib.pyplot as plt
-from datetime import datetime
+
 
 # append parent directory to path
 fileAbsPath = os.path.abspath(__file__)
@@ -15,6 +14,8 @@ print("parentDir: ", parentDir)
 sys.path.append(parentDir)
 
 from parse.loadParquetSample import loadParquetSample
+from plot.plotFrequency import plotFrequency
+
 
 # get the current folder path
 currentPath = Path(__file__).resolve().parent
@@ -33,6 +34,10 @@ print("data: ", data.shape)
 # print first rows
 print(data.head())
 
+# plot frequency
+print("plotting frequency...")
+plotFrequency(data["timeSeconds"], machineName + sampleName)
+
 # save data to parquet
 print("saving test parquet...")
 
@@ -43,6 +48,6 @@ data.to_parquet(os.path.join(dataPath, normalizedDataFolder, fileName), index=Fa
 # plot data
 print("plotting data...")
 plt.figure()
-plt.plot(data["time"], data["stSigAxCurrentB"], label="stSigAxCurrentB")
+plt.plot(data["timeSeconds"], data["stSigAxCurrentB"], label="stSigAxCurrentB")
 plt.grid()
 plt.show()

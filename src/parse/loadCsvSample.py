@@ -14,7 +14,7 @@ def loadCsvSample(
     Load a sample in csv format and return a pandas dataframe.
       - Removes duplicates and normalizes time.
       - Removes columns that are full of NaN.
-      - Linearly interpolates missing points.
+      - Interpolates the whole signal at a given frequency.
       - Converts current to Amperes if necessary.
 
     Parameters
@@ -23,12 +23,16 @@ def loadCsvSample(
     currentUnit (str): The unit of the current signals. Default is "A". Other options are "mA".
     debug (bool): If True, print debug information. Default is False.
     """
+
+    # frequency of the signal
+    frequency = 2000  # Hz
+
     # Get all files in the folder
     files = os.listdir(folderPath)
     if debug:
         print("formatSampleData - number of files to process: ", len(files))
 
-    dfs = []
+    signals = []
     lengths = []
 
     # load all of the files
@@ -51,7 +55,7 @@ def loadCsvSample(
         if signalName in currentSignals:
             signalData = convertToAmperes(signalData, currentUnit)
 
-        dfs.append(signalData)
+        signals.append(signalData)
         lengths.append(signalData.shape[0])
 
         if debug:
@@ -60,37 +64,35 @@ def loadCsvSample(
     # find signal with the most points
     maxLength = max(lengths)
     if debug:
-        print("formatSampleData - max nb of points: ", maxLength)
+        print("formatSampleData - initial nb of points: ", maxLength)
     index = lengths.index(maxLength)
     fileName = files[index].split(".")[0]
 
-    formattedSampleData = dfs[index]
-    formattedSampleData.rename(columns={"value": fileName}, inplace=True)
+    # create new time vector
+    minTime = signals[index]["timeSeconds"].min()
+    maxTime = signals[index]["timeSeconds"].max()
+    timeVector = np.arange(minTime, maxTime, 1 / frequency)
 
-    nbInterpolations = 0
+    # create a new dataframe
+    formattedSampleData = DataFrame()
+    formattedSampleData["timeSeconds"] = timeVector
 
     if debug:
         print("formatSampleData - interpolating signals")
 
-    # add other signals and interpolate if necessary
-    for i in range(len(dfs)):
+    # interpolate all signals
+    for i in range(len(signals)):
         fileName = files[i].split(".")[0]
-        if i != index:
-            if len(dfs[i]) < maxLength:
-                nbInterpolations += 1
 
-                # Interpolate the signal if less than the max length
-                interpolated = np.interp(
-                    formattedSampleData["timeSeconds"],
-                    dfs[i]["timeSeconds"],
-                    dfs[i]["value"],
-                )
-                formattedSampleData[fileName] = interpolated
-            else:
-                # Add the signal to the formatted data
-                formattedSampleData[fileName] = dfs[i]["value"]
+        # Interpolate the signal if less than the max length
+        interpolated = np.interp(
+            formattedSampleData["timeSeconds"],
+            signals[i]["timeSeconds"],
+            signals[i]["value"],
+        )
+        formattedSampleData[fileName] = interpolated
 
     if debug:
-        print("formatSampleData - Number of signals interpolatedd: ", nbInterpolations)
+        print("formatSampleData - final nb of points: ", formattedSampleData.shape[0])
 
     return formattedSampleData

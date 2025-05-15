@@ -1,6 +1,7 @@
 data/**/*.csv
 data/**/*.nc
 !data/signalsDescription.csv
+!data/machineProperties.csv
 results/**
 **/**/.DS_Store
 **/__pycache__/

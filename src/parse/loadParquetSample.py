@@ -13,8 +13,10 @@ def loadParquetSample(
     Load a sample in parquet format and return a pandas dataframe.
       - Removes duplicates and normalizes time.
       - Removes columns that are full of NaN.
-      - Linearly interpolates missing points.
+      - Reinterpolates the whole signal at a given frequency.
     """
+    # frequency of the signal
+    frequency = 2000  # Hz
 
     # load all data
     data = pd.read_parquet(path)
@@ -25,14 +27,18 @@ def loadParquetSample(
     # normalize time
     data["time"] = Utils.normalizeParquetTime(data["time"])
 
+    if debug:
+        print("Initial number of points: ", data.shape[0])
+
     # remove columns that are full of NaN
     data = data.dropna(axis=1, how="all")
 
     # create correct time series
-    correctTime = data["time"].drop_duplicates()
-    correctTime = correctTime.reset_index(drop=True)
+    # create a new equally spaced time series
+    minTime = data["time"].min()
+    maxTime = data["time"].max()
 
-    nbPoints = len(correctTime)
+    correctTime = np.arange(minTime, maxTime, 1 / frequency)
 
     finalData = pd.DataFrame()
     finalData["time"] = correctTime
@@ -46,21 +52,17 @@ def loadParquetSample(
             # remove duplicates
             signalWithoutNan = data[col].dropna()
 
-            # interpolate if points are missing
-            if len(signalWithoutNan) != nbPoints:
-                timeWithoutNan = data["time"][signalWithoutNan.index]
+            # interpolate signal
+            timeWithoutNan = data["time"][signalWithoutNan.index]
 
-                correctSignal = np.interp(
-                    correctTime,
-                    timeWithoutNan,
-                    signalWithoutNan,
-                )
+            correctSignal = np.interp(
+                correctTime,
+                timeWithoutNan,
+                signalWithoutNan,
+            )
 
-                # add to final data
-                finalData[col] = correctSignal
-            else:
-                # add to final data
-                finalData[col] = signalWithoutNan
+            # add to final data
+            finalData[col] = correctSignal
 
             # convert currents to Amperes
             if col in currentSignals:
@@ -70,6 +72,7 @@ def loadParquetSample(
     finalData = finalData.rename(columns={"time": "timeSeconds"})
 
     if debug:
+        print("Final number of points: ", finalData.shape[0])
         print("normalized data: ", finalData.shape)
         print(finalData.head())
 

@@ -12,14 +12,14 @@ print("parentDir: ", parentDir)
 sys.path.append(parentDir)
 
 # import functions
-from src.parse.loadCsvSample import loadCsvSample
+from parse.loadCsvSample import loadCsvSample
 
 # get the current folder path
 currentPath = Path(__file__).resolve().parent
 print(currentPath)
 
 machinePath = "../../data/Mecatis/"
-samplePath1 = "Warmup_Mecatis_03_02_25/"
+samplePath1 = "03_02_25/"
 
 # load all data
 data = loadCsvSample(

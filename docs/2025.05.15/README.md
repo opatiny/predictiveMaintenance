@@ -22,9 +22,9 @@ Finally, here is the plot for the MILL machine:
 
 The different machines have different sampling frequencies. This depends on the controller of each machine and cannot be fixed. Varying frequencies are to be expected.
 
-How to solve this? Systematically interpolate the samples at a fixed frequency, for example 1000Hz?
+How to solve this? Systematically interpolate the samples at a fixed frequency, for example 1000Hz? After reflection, I think that taking the maximum sampling frequency is better, so we do not loose details of the data -> set the interpolation frequency to 2000 Hz.
 
-Frequencies for each machine:
+Base frequencies for each machine:
 
 - Locle: 1000 Hz
 - Mecatis: 1250 Hz
