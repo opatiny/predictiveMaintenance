@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 from scipy.signal import correlate
 
+from Utils import normalizeSignal
+
 
 def findOffsetX(
     signal: pd.Series,
@@ -21,7 +23,12 @@ def findOffsetX(
     int: The optimal x offset as an index to align signal on the reference.
     """
 
-    correlation = correlate(signal, reference, mode="full")
+    # todo: should I normalize the signals before correlation?
+
+    normSignal = normalizeSignal(signal)
+    normReference = normalizeSignal(reference)
+
+    correlation = correlate(normSignal, normReference, mode="full")
     # Find the index of the maximum correlation
     max_index = np.argmax(correlation)
     # Calculate the offset
