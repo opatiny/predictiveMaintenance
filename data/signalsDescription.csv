@@ -1,52 +1,52 @@
-﻿fileName,description,unit,useful,comment
-lrSigAxeBTemp.csv,Axis B motor temperature,°C,0,constant value
-lrSigAxeCTemp.csv,Axis C motor temperature,°C,0,constant value
-lrSigAxeXTemp.csv,Axis X motor temperature,°C,0,constant value
-lrSigAxeYTemp.csv,Axis Y motor temperature,°C,0,constant value
-lrSigAxeZTemp.csv,Axis Z motor temperature,°C,0,constant value
-lrSigCryoLubState.csv,Cryogenic lubrication state,-,0,
-lrSigFeedRateOverride.csv,Milling speed override,%,0,
-lrSigLubrificationState.csv,Lubrication state,-,0,
-lrSigPieceTemp.csv,Piece temperature,°C,0,
-lrSigSpindleOverride.csv,Spindle speed override,%,0,
-lrSigSpindleTemp.csv,Spindle temperature,°C,1,
-lrSigTableTemp.csv,Table temperature,°C,0,
-lrSigZoneAxeTemp.csv,Axes temperature,°C,0,full of zeros
-m70DataDouble.csv,Variables for speed sensors communication,-,0,
-stSigAxCurrentB.csv,Axis B current,A,1,
-stSigAxCurrentC.csv,Axis C current,A,1,
-stSigAxCurrentS.csv,Spindle current,A,1,
-stSigAxCurrentX.csv,Axis X current,A,1,
-stSigAxCurrentY.csv,Axis Y current,A,1,
-stSigAxCurrentZ.csv,Axis Z current,A,1,
-stSigAxFollErrB.csv,Axis B following error,um,1,
-stSigAxFollErrC.csv,Axis C following error,um,1,full of zeros
-stSigAxFollErrX.csv,Axis X following error,um,1,
-stSigAxFollErrY.csv,Axis Y following error,um,1,
-stSigAxFollErrZ.csv,Axis Z following error,um,1,
-stSigAxPosACSB.csv,Position of Axis B in ACS Coordinates,mm,1,
-stSigAxPosACSC.csv,Position of Axis C in ACS Coordinates,mm,1,
-stSigAxPosACSX.csv,Position of Axis X in ACS Coordinates,mm,1,
-stSigAxPosACSY.csv,Position of Axis Y in ACS Coordinates,mm,1,
-stSigAxPosACSZ.csv,Position of Axis Z in ACS Coordinates,mm,1,
-stSigAxPosMCSB.csv,Position of Axis B in MCS Coordinates,mm,1,
-stSigAxPosMCSC.csv,Position of Axis C in MCS Coordinates,mm,1,
-stSigAxPosMCSX.csv,Position of Axis X in MCS Coordinates,mm,1,
-stSigAxPosMCSY.csv,Position of Axis Y in MCS Coordinates,mm,1,
-stSigAxPosMCSZ.csv,Position of Axis Z in MCS Coordinates,mm,1,
-stSigAxVeloACSB.csv,Velocity of Axis B in ACS Coordinates,°/s,1,
-stSigAxVeloACSC.csv,Velocity of Axis C in ACS Coordinates,°/s,1,
-stSigAxVeloACSX.csv,Velocity of Axis X in ACS Coordinates,°/s,1,
-stSigAxVeloACSY.csv,Velocity of Axis Y in ACS Coordinates,°/s,1,
-stSigAxVeloACSZ.csv,Velocity of Axis Z in ACS Coordinates,°/s,1,
-stSigAxVeloMCSB.csv,Velocity of Axis B in MCS Coordinates,°/s,1,
-stSigAxVeloMCSC.csv,Velocity of Axis C in MCS Coordinates,°/s,1,
-stSigAxVeloMCSX.csv,Velocity of Axis X in MCS Coordinates,°/s,1,
-stSigAxVeloMCSY.csv,Velocity of Axis Y in MCS Coordinates,°/s,1,
-stSigAxVeloMCSZ.csv,Velocity of Axis Z in MCS Coordinates,°/s,1,
-stSigOperation.csv,Operation number,-,1,command
-stSigPowerMotS.csv,Spindle power,W,1,
-stSigSinus.csv,Surveillance signal,-,1,
-stSigSpindleIndicator.csv,Spindle current indicator,A,1,
-stSigSpindleVelocity.csv,Spindle target speed,rpm,1,command
-stTimeStampFast.csv,Time stamp,-,,
+﻿name,description,min,max,unit,useful,comment
+lrSigAxeBTemp,Axis B motor temperature,0,100,°C,0,constant value
+lrSigAxeCTemp,Axis C motor temperature,0,100,°C,0,constant value
+lrSigAxeXTemp,Axis X motor temperature,0,100,°C,0,constant value
+lrSigAxeYTemp,Axis Y motor temperature,0,100,°C,0,constant value
+lrSigAxeZTemp,Axis Z motor temperature,0,100,°C,0,constant value
+lrSigCryoLubState,Cryogenic lubrication state,,,-,0,
+lrSigFeedRateOverride,Milling speed override,0,100,%,0,
+lrSigLubrificationState,Lubrication state,,,-,0,
+lrSigPieceTemp,Piece temperature,0,100,°C,0,
+lrSigSpindleOverride,Spindle speed override,0,100,%,0,
+lrSigSpindleTemp,Spindle temperature,0,100,°C,1,
+lrSigTableTemp,Table temperature,0,100,°C,0,
+lrSigZoneAxeTemp,Axes temperature,0,100,°C,0,full of zeros
+m70DataDouble,Variables for speed sensors communication,,,-,0,
+stSigAxCurrentB,Axis B current,0,10,A,1,
+stSigAxCurrentC,Axis C current,0,10,A,1,
+stSigAxCurrentS,Spindle current,0,10,A,1,
+stSigAxCurrentX,Axis X current,0,10,A,1,
+stSigAxCurrentY,Axis Y current,0,10,A,1,
+stSigAxCurrentZ,Axis Z current,0,10,A,1,
+stSigAxFollErrB,Axis B following error,0,,um,1,
+stSigAxFollErrC,Axis C following error,0,,um,1,full of zeros
+stSigAxFollErrX,Axis X following error,0,,um,1,
+stSigAxFollErrY,Axis Y following error,0,,um,1,
+stSigAxFollErrZ,Axis Z following error,0,,um,1,
+stSigAxPosACSB,Position of Axis B in ACS Coordinates,,,mm,1,
+stSigAxPosACSC,Position of Axis C in ACS Coordinates,,,mm,1,
+stSigAxPosACSX,Position of Axis X in ACS Coordinates,,,mm,1,
+stSigAxPosACSY,Position of Axis Y in ACS Coordinates,,,mm,1,
+stSigAxPosACSZ,Position of Axis Z in ACS Coordinates,,,mm,1,
+stSigAxPosMCSB,Position of Axis B in MCS Coordinates,,,mm,1,
+stSigAxPosMCSC,Position of Axis C in MCS Coordinates,,,mm,1,
+stSigAxPosMCSX,Position of Axis X in MCS Coordinates,,,mm,1,
+stSigAxPosMCSY,Position of Axis Y in MCS Coordinates,,,mm,1,
+stSigAxPosMCSZ,Position of Axis Z in MCS Coordinates,,,mm,1,
+stSigAxVeloACSB,Velocity of Axis B in ACS Coordinates,,,°/s,1,
+stSigAxVeloACSC,Velocity of Axis C in ACS Coordinates,,,°/s,1,
+stSigAxVeloACSX,Velocity of Axis X in ACS Coordinates,,,°/s,1,
+stSigAxVeloACSY,Velocity of Axis Y in ACS Coordinates,,,°/s,1,
+stSigAxVeloACSZ,Velocity of Axis Z in ACS Coordinates,,,°/s,1,
+stSigAxVeloMCSB,Velocity of Axis B in MCS Coordinates,,,°/s,1,
+stSigAxVeloMCSC,Velocity of Axis C in MCS Coordinates,,,°/s,1,
+stSigAxVeloMCSX,Velocity of Axis X in MCS Coordinates,,,°/s,1,
+stSigAxVeloMCSY,Velocity of Axis Y in MCS Coordinates,,,°/s,1,
+stSigAxVeloMCSZ,Velocity of Axis Z in MCS Coordinates,,,°/s,1,
+stSigOperation,Operation number,,,-,1,command
+stSigPowerMotS,Spindle power,0,,W,1,
+stSigSinus,Surveillance signal,,,-,1,
+stSigSpindleIndicator,Spindle current indicator,0,10,A,1,
+stSigSpindleVelocity,Spindle target speed,0,,rpm,1,command
+stTimeStampFast,Time stamp,,,-,,

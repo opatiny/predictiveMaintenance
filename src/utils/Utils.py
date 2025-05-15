@@ -69,13 +69,16 @@ def getYLabel(fileName: str) -> str:
     Get the label for the y-axis of a plot from a file name.
     """
 
+    # remove the .csv extension
+    fileName = fileName.split(".")[0]
+
     fileAbsPath = os.path.abspath(__file__)
     fileDir = os.path.dirname(fileAbsPath)
     infoPath = fileDir + "/../../data/signalsDescription.csv"
 
     signalsInformation = pd.read_csv(infoPath, sep=",")
 
-    signalRow = signalsInformation[signalsInformation["fileName"] == fileName]
+    signalRow = signalsInformation[signalsInformation["name"] == fileName]
 
     if len(signalRow) == 0:
         print("Signal not found in signalsDescription.csv")

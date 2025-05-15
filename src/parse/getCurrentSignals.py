@@ -20,9 +20,6 @@ def getCurrentSignals() -> list[str]:
     ]
 
     # get the names of the signals
-    signalNames = signalsWithCurrent["fileName"].tolist()
-
-    # remove extension
-    signalNames = [name.split(".")[0] for name in signalNames]
+    signalNames = signalsWithCurrent["name"].tolist()
 
     return signalNames

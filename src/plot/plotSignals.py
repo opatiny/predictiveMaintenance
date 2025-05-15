@@ -69,7 +69,7 @@ def plotSignals(dataPath: str, savePath: str, options: PlotSignalsOptions = {}) 
     usefulSignals = signalsInformation[signalsInformation["useful"] == 1]
 
     if filterPlots:
-        files = [file for file in files if file in usefulSignals["fileName"].values]
+        files = [file for file in files if file in usefulSignals["name"].values]
 
     # If nbPlots is None, plot all signals
     if nbPlots is None:
@@ -89,7 +89,7 @@ def plotSignals(dataPath: str, savePath: str, options: PlotSignalsOptions = {}) 
 
         # compute time to run plotSignal
         start_time = time.time()
-        plotSignal(dataPath + "/" + file, nbPoints, debug)
+        plotSignal(dataPath + "/" + file + ".csv", nbPoints, debug)
         end_time = time.time()
 
         if debug:
@@ -97,9 +97,8 @@ def plotSignals(dataPath: str, savePath: str, options: PlotSignalsOptions = {}) 
 
         # Save the plot
         start_time = time.time()
-        fileName = file.split(".")[0]
         # todo: very slow when using svg format
-        plt.savefig(saveFolderPath + "/" + fileName + ".png", format="png")
+        plt.savefig(saveFolderPath + "/" + file + ".png", format="png")
         end_time = time.time()
 
         if debug:
