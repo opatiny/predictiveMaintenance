@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def checkSignalConstant(sample: pd.Series, debug: bool = False) -> bool:
+def checkSignalConstant(signal: pd.Series, debug: bool = False) -> bool:
     """
     Check if a signal is constant or not.
     A signal is considered constant if it has the same value for all points.
@@ -13,14 +13,14 @@ def checkSignalConstant(sample: pd.Series, debug: bool = False) -> bool:
         bool: True if the signal is constant, False otherwise.
     """
     # check if the signal is constant
-    if sample.nunique() == 1:
+    if signal.nunique() == 1:
         if debug:
             print("Signal is constant")
         return True
     else:
 
         # check if the signal is constant but contains NaN
-        if sample.dropna().nunique() == 1:
+        if signal.dropna().nunique() == 1:
             if debug:
                 print("Signal is constant but contains NaN")
             return False
@@ -29,8 +29,8 @@ def checkSignalConstant(sample: pd.Series, debug: bool = False) -> bool:
             print("Signal is not constant")
 
         # check at which index the signal changes
-        for i in range(len(sample) - 1):
-            if sample[i] != sample[i + 1]:
+        for i in range(len(signal) - 1):
+            if signal[i] != signal[i + 1]:
                 if debug:
                     print(f"Signal changes at index {i}")
                 return False
