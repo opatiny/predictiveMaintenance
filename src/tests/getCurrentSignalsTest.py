@@ -2,7 +2,6 @@
 import os
 import sys
 
-
 fileAbsPath = os.path.abspath(__file__)
 fileDir = os.path.dirname(fileAbsPath)
 parentDir = os.path.dirname(fileDir)

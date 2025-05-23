@@ -15,9 +15,7 @@ def getCurrentSignals() -> list[str]:
     signalsInformation = pd.read_csv(infoPath, sep=",")
 
     # filter signals with unit "A"
-    signalsWithCurrent = signalsInformation[
-        signalsInformation["unit"].str.contains("A")
-    ]
+    signalsWithCurrent = signalsInformation[signalsInformation["unit"] == "A"]
 
     # get the names of the signals
     signalNames = signalsWithCurrent["name"].tolist()

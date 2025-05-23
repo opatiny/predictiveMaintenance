@@ -6,6 +6,7 @@
 - "Check" functions: Functions to detect issues with the data
 - Alignment functions
 - Function to plot sample frequency to verify frequency is correct
+- `findCommonSection`: get common section of two segments with offset
 
 ## Segments' length
 
