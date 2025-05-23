@@ -17,3 +17,9 @@
 - The Locle and MILL machines do not have the signal which we use for the segmentation
 
 ![./segmentsLength.png](./segmentsLength.png)
+
+## The solution to everything? Dynamic time warping
+
+Tests on the Mecatis machine data.
+![./dtw-initialData.png](./dtw-initialData.png)
+![./dtw-results.png](./dtw-results.png)
