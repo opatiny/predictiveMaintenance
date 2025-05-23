@@ -6,3 +6,13 @@
 - "Check" functions: Functions to detect issues with the data
 - Alignment functions
 - Function to plot sample frequency to verify frequency is correct
+
+## Segments' length
+
+- between 70000 and 1e6 points in the segments
+- segments' length varies from sample to sample -> ploblematic for comparison
+- we computed all of the segments' length and subtracted the lengths of a reference sample, in our case Mecatis_03_02_25
+- maximum length difference: 19 points
+- The Locle and MILL machines do not have the signal which we use for the segmentation
+
+![./segmentsLength.png](./segmentsLength.png)
