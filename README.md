@@ -2,76 +2,47 @@
 
 ## Context
 
-Use warm-up data of micro5 milling machines in order to identify the current machine, and create a transformation matrix to adapt tools to the given machine.
+Use warm-up data of micro5 milling machines in order to identify the machine the sample comes from. Implement normalization functions to ensure the uniformity of the data.
 
-## Objectives
+## Initial objectives
 
 1. Cluster data in order to attribute new data to the correct machine
-2. Create a transformation matrix in order to normalize a machines data into a reference framework
+2. Create a transformation procedure in order to normalize a machines data into a reference framework
+
+## Repository structure
+
+### Branches
+
+The developments of the different students who participated to the project are placed in different branches of this repository. To access some of the code, you should inspect the other branches.
+
+### `main` branch
+
+The `main` branch contains code for visualization of the data, checking that the data is valid, normalizing the data, and a prototype of temperature correction for the spindle current.
+
+The `main` branch has the following structure:
+
+- `data`: contains all of the samples from the different machines
+- `docs`: weekly readmes of advancements made and other documentation
+- `src`: main folder containing the code
+- `results`: folder used to output results from various functions
+
+The `src` folder itself contains the following subfolders:
+
+- `check`: control functions to verify that the data is suitable for further analysis
+- `notebooks`: Jupyter notebooks, mainly to test the temperature correction procedure
+- `parse`: functions to load and normalize sample data, be it from `.csv` or `.parquet`files
+- `plot`: various functions to plot the data
+- `signalProcessing`: functions to modify a signal
+- `temperatureCorrection`: all code relative to the temperature correction prototype
+- `tests`: scripts that allow to call the other functions in order to test if they work properly. The code in this folder is a good starting point to understand how the rest of the code works and is organised.
+- `utils`: All utilities functions
+
+## Data folder structure
+
+The data to process must be placed in the top level `data` folder. Inside of that folder, create one subfolder per machine, and place the corresponding samples in the subfolders. This is what the `data` folder looks like:
+
+![./docs/images/dataFolder.png](./docs/images/dataFolder.png)
 
 ## Running unit tests
 
-Just run the python test file as you would any other file.
-
-## Data format
-
-### Time stamps
-
-#### In `.csv` files
-
-Time stamps of the csv samples are in Microsoft filetime format!!
-
-"The FILETIME structure is a 64-bit value that represents the number of 100-nanosecond intervals that have elapsed since January 1, 1601, Coordinated Universal Time (UTC)."
-
-#### In `.parquet` files
-
-`time` column contains time as date strings in ISO 8601.
-
-https://fr.wikipedia.org/wiki/ISO_8601
-
-### Signals that look interesting
-
-- spindle temperature: lrSigSpindleTemp
-- spindle indicator: also the spindle current!
-- axes currents
-  - stSigAxCurrentB
-  - stSigAxCurrentS
-  - stSigAxCurrentX
-  - stSigAxCurrentY
-  - stSigAxCurrentZ
-- following error signals
-- axes positions (command)
-- axes velocities
-- spindle power: stSigPowerMotS
-- commands:
-  - stSigSpindleVelocity
-  - stSigOperation
-
-### Positions
-
-- ACS: tool reference frame
-- MCS: machine reference frame
-
-### Overrides
-
-Some of the signals are overrides of the user on the target value defined inside the program. This value is expressed as a percentage of the target value. For example, an override of 150% means that the current value is 1.5 times greater than the one in the program. If there is no user override, the override variables are at 100.
-
-## Implementation
-
-### Data frames
-
-Data frames allow to store table like data. We have two main libraries that handle dataframes: `pandas` and `polars`. Apparently, `polars` is a lot faster though.
-
-https://blog.jetbrains.com/pycharm/2024/07/polars-vs-pandas/
-
-### Parsing string dates
-
-- initially wanted to use `datetime.strptime(date, format)`, but it's super slow (several minutes for 3e6 values...)
-- alternatives:
-  - `pandas.to_datetime()`
-  - `pendulum`
-  - `isotime`
-
-## Various notes
-
-- does knowing the temperature allow us to make some kind of compensation on the data?
+This project contains unit tests for some of the functions. All unit tests are placed in the subfolders named `__tests__`. To run the unit tests, just run the python test file as you would any other file.

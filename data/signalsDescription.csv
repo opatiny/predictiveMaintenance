@@ -5,10 +5,10 @@ lrSigAxeXTemp,Axis X motor temperature,0,100,°C,0,constant value
 lrSigAxeYTemp,Axis Y motor temperature,0,100,°C,0,constant value
 lrSigAxeZTemp,Axis Z motor temperature,0,100,°C,0,constant value
 lrSigCryoLubState,Cryogenic lubrication state,,,-,0,
-lrSigFeedRateOverride,Milling speed override,0,100,%,0,
+lrSigFeedRateOverride,Milling speed override,100,100,%,0,
 lrSigLubrificationState,Lubrication state,,,-,0,
 lrSigPieceTemp,Piece temperature,0,100,°C,0,
-lrSigSpindleOverride,Spindle speed override,0,100,%,0,
+lrSigSpindleOverride,Spindle speed override,100,100,%,0,
 lrSigSpindleTemp,Spindle temperature,0,100,°C,1,
 lrSigTableTemp,Table temperature,0,100,°C,0,
 lrSigZoneAxeTemp,Axes temperature,0,100,°C,0,full of zeros
@@ -18,7 +18,7 @@ stSigAxCurrentC,Axis C current,0,10,A,1,
 stSigAxCurrentS,Spindle current,0,10,A,1,
 stSigAxCurrentX,Axis X current,0,10,A,1,
 stSigAxCurrentY,Axis Y current,0,10,A,1,
-stSigAxCurrentZ,Axis Z current,0,10,A,1,
+stSigAxCurrentZ,Axis Z current,0,10,A,0,
 stSigAxFollErrB,Axis B following error,0,,um,1,
 stSigAxFollErrC,Axis C following error,0,,um,1,full of zeros
 stSigAxFollErrX,Axis X following error,0,,um,1,
