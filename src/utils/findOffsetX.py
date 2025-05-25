@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from scipy.signal import correlate
 
-from Utils import normalizeSignal
+from utils.Utils import normalizeSignal
 
 
 def findOffsetX(

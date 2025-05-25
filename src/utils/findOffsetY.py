@@ -8,7 +8,7 @@ def errorFun(x: float, data: pd.Series, reference: pd.Series) -> float:
     return error
 
 
-def findOffsetY(signal: pd.Series, reference: pd.Series) -> float:
+def findOffsetY(signal: pd.Series, reference: pd.Series) -> list[float]:
     """
     Find the y offset that minimizes the error between the signal and reference.
 
@@ -19,7 +19,7 @@ def findOffsetY(signal: pd.Series, reference: pd.Series) -> float:
 
     Returns
     -------
-    float: The optimal y offset.
+    list[float]: The optimal y offset ans well as the corresponding root mean square error (RMSE).
     """
     x0 = 0.0  # start with an offset of 0°C
     result = minimize(errorFun, x0, args=(signal, reference))

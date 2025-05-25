@@ -30,7 +30,7 @@ def findCommonSection(
     # ignore index
     return pd.DataFrame(
         {
-            "signal": signal.loc[sigStart:sigEnd].reset_index(drop=True),
-            "reference": reference.loc[refStart:refEnd].reset_index(drop=True),
+            "signal": signal[sigStart:sigEnd].reset_index(drop=True),
+            "reference": reference[refStart:refEnd].reset_index(drop=True),
         },
     )

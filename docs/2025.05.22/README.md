@@ -20,6 +20,39 @@
 
 ## The solution to everything? Dynamic time warping
 
-Tests on the Mecatis machine data.
+The lib currently used for DTW actually doesn't work on signals with a lot of points. It even makes the jupyter kernel crash when signal is around 2e5 points long. For a signal of 2e4 points, it takes 22s to run to align 2 signals on a reference...
+
+Tests on the Mecatis machine data: Axis B current
+
 ![./dtw-initialData.png](./dtw-initialData.png)
 ![./dtw-results.png](./dtw-results.png)
+
+Spindle current: We can see that DTW does not handle it very well when there is a y offset.
+
+![./originalData-spindleCurrent.png](./originalData-spindleCurrent.png)
+![./dtw-spindleCurrent.png](./dtw-spindleCurrent.png)
+
+## Using X and Y alignment instead of DTW
+
+![./originalData-spindleCurrent.png](./originalData-spindleCurrent.png)
+![./xOffset-spindleCurrent.png](./xOffset-spindleCurrent.png)
+![./xyOffset-spindleCurrent.png](./xyOffset-spindleCurrent.png)
+
+## Comparison of errors between signals and reference
+
+- Machine: Mecatis
+- Reference signal: 03_02_25
+
+| Description          | 05_02_25 | 17_02_25 |
+| -------------------- | -------- | -------- |
+| Original data        | 0.316    | 0.245    |
+| After DTW            | 0.442    | 0.345    |
+| After only Y offset  | 0.305    | 0.216    |
+| After X and Y offset | 0.126    | 0.126    |
+
+## Best solution: Combination of both?
+
+- split signals into segments
+- normalize segments?
+- remove Y offset
+- then run DTW to align in X and avoid problems caused by segments having different lengths
