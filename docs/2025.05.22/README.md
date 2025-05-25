@@ -46,8 +46,8 @@ Spindle current: We can see that DTW does not handle it very well when there is 
 | Description          | 05_02_25 | 17_02_25 |
 | -------------------- | -------- | -------- |
 | Original data        | 0.316    | 0.245    |
-| After DTW            | 0.442    | 0.345    |
-| After only Y offset  | 0.305    | 0.216    |
+| After DTW            | 0.056    | 0.076    |
+| After Y offset only  | 0.305    | 0.216    |
 | After X and Y offset | 0.126    | 0.126    |
 
 ## Best solution: Combination of both?
