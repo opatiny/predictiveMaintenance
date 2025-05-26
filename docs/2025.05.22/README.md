@@ -42,13 +42,15 @@ Spindle current: We can see that DTW does not handle it very well when there is 
 
 - Machine: Mecatis
 - Reference signal: 03_02_25
+- Section: 711 t0 714 s -> 3750 points
 
-| Description          | 05_02_25 | 17_02_25 |
-| -------------------- | -------- | -------- |
-| Original data        | 0.316    | 0.245    |
-| After DTW            | 0.056    | 0.076    |
-| After Y offset only  | 0.305    | 0.216    |
-| After X and Y offset | 0.126    | 0.126    |
+| Description            | 05_02_25 | 17_02_25 |
+| ---------------------- | -------- | -------- |
+| Original data          | 0.316    | 0.245    |
+| After DTW              | 0.056    | 0.076    |
+| After Y offset only    | 0.305    | 0.216    |
+| After X and Y offset   | 0.126    | 0.126    |
+| After Y offset and DTW | 0.028    | 0.027    |
 
 ## Best solution: Combination of both?
 
