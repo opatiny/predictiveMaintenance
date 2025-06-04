@@ -39,9 +39,7 @@ The `src` folder itself contains the following subfolders:
 
 ## Data folder structure
 
-The data to process must be placed in the top level `data` folder. Inside of that folder, create one subfolder per machine, and place the corresponding samples in the subfolders. This is what the `data` folder looks like:
-
-![./docs/images/dataFolder.png](./docs/images/dataFolder.png)
+Empty
 
 ## Running unit tests
 
